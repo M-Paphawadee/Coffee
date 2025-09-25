@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>COFFEELINE</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --brown:#8B4513;--brown2:#D2691E;--muted:#6c757d;--ok:#28a745;--warn:#ffc107;--danger:#dc3545;--info:#0d6efd;
+    --bg1:#f5f7fa;--bg2:#c3cfe2;
+  }
+  body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 100%);min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  /* header */
+  .header{display:none;background:linear-gradient(135deg,var(--brown) 0%,var(--brown2) 100%);color:#fff;padding:14px 20px;align-items:center;justify-content:space-between}
+  .brand{font-weight:700;font-size:1.2rem}
+  .userbox{display:flex;gap:10px;align-items:center}
+  .chip{background:rgba(255,255,255,.15);padding:6px 10px;border-radius:999px}
+  .btn{border:none;border-radius:10px;padding:8px 12px;cursor:pointer}
+  .btn:hover{opacity:.9}
+  .btn-ghost{background:rgba(255,255,255,.25);color:#fff}
+  /* container */
+  .wrap{max-width:1200px;margin:0 auto;padding:22px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:14px}
+  .card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.08);border-left:5px solid var(--brown)}
+  .card .hd{display:flex;gap:10px;align-items:center;border-bottom:1px solid #eee;padding-bottom:10px;margin-bottom:10px}
+  .li{display:flex;gap:10px;align-items:center;background:#f8f9fa;border-radius:8px;padding:10px;margin-top:10px;cursor:pointer}
+  .li:hover{background:#eef1f4;transform:translateX(3px)}
+  .dot{color:var(--brown)}
+  .badge{margin-left:auto;background:var(--danger);color:#fff;border-radius:999px;padding:2px 7px;font-size:.72rem;min-width:18px;text-align:center}
+  /* quick stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:16px}
+  .stat{background:#fff;border-radius:12px;padding:14px;box-shadow:0 5px 14px rgba(0,0,0,.06);text-align:center}
+  .stat h3{color:var(--brown);font-size:1.4rem}
+  .stat p{color:#666}
+  /* login */
+  .center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .login{width:100%;max-width:430px;background:#fff;border-radius:16px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+  .login h1{margin-bottom:4px}
+  .login small{color:#666}
+  .row{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+  .row input{padding:10px 12px;border:1px solid #dcdcdc;border-radius:10px}
+  .row .hint{font-size:.82rem;color:#666}
+  .btn-full{width:100%;padding:11px 14px;border:none;border-radius:12px;background:var(--brown);color:#fff;font-weight:600;margin-top:12px}
+  .btn-full.secondary{background:var(--info)}
+  .mt{margin-top:16px}
+  /* page */
+  .page{display:none}
+  .crumbs{font-size:.9rem;color:#666;margin-bottom:10px}
+  .title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .title h2{font-size:1.1rem}
+  .grid2{display:grid;grid-template-columns:1fr;gap:12px}
+  .form{background:#fff;border-radius:12px;padding:14px;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .form .g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .form label{font-size:.88rem;color:#333}
+  .form input,.form select,.form textarea{width:100%;padding:10px;border:1px solid #dcdcdc;border-radius:10px}
+  .table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .table th,.table td{padding:10px;border-bottom:1px solid #eee;text-align:left}
+  .pill{padding:4px 8px;border-radius:999px;font-size:.78rem}
+  .pill.ok{background:#e9f9ee;color:#177a33;border:1px solid #bff0c9}
+  .pill.warn{background:#fff6dd;color:#9b7b0a;border:1px solid #ffe193}
+  /* drawer chat (คงไว้จากเดิม แบบย่อ) */
+  .drawer{position:fixed;top:0;right:-420px;width:420px;max-width:100vw;height:100vh;background:#fff;box-shadow:-6px 0 24px rgba(0,0,0,.15);transition:right .35s;z-index:50;display:flex;flex-direction:column;border-left:4px solid var(--info)}
+  .drawer.open{right:0}
+  .drawer .hd{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:linear-gradient(135deg,var(--info),#57a0ff);color:#fff}
+  .drawer .body{padding:12px;overflow:auto;flex:1;background:#f6f8fb}
+  .drawer .foot{padding:10px;border-top:1px solid #eee;display:flex;gap:8px}
+  .drawer input{flex:1;padding:10px;border:1px solid #dcdcdc;border-radius:10px}
+  .primary{background:var(--info);color:#fff}
+  .danger{background:var(--danger);color:#fff}
+  /* color stripes for modules */
+  .harvest{border-left-color:#28a745}.production{border-left-color:#fd7e14}.quality{border-left-color:#dc3545}.warehouse{border-left-color:#6f42c1}.order{border-left-color:#007bff}.logistics{border-left-color:#20c997}.reports{border-left-color:#ffc107}
+</style>
+</head>
+<body>
+
+<!-- ======= LOGIN ======= -->
+<div id="view-login" class="center">
+  <form class="login" onsubmit="return doLogin(event)">
+    <h1>☕ COFFEELINE</h1>
+    <small>เข้าสู่ระบบเพื่อจัดการการผลิต/ออเดอร์</small>
+    <div class="row">
+      <label>ชื่อผู้ใช้</label>
+      <input id="u" placeholder="admin หรือ staff" required>
+    </div>
+    <div class="row">
+      <label>รหัสผ่าน</label>
+      <input id="p" type="password" placeholder="อย่างน้อย 4 ตัวอักษร" minlength="4" required>
+      <div class="hint">เดโม่: ใช้ user ใดก็ได้ ระบบจะจำสิทธิ์ไว้ในเบราว์เซอร์</div>
+    </div>
+    <button class="btn-full" type="submit">เข้าสู่ระบบ</button>
+    <button class="btn-full secondary" type="button" onclick="fillDemo()">ใส่ข้อมูลเดโม่</button>
+  </form>
+</div>
+
+<!-- ======= APP HEADER ======= -->
+<header id="app-header" class="header">
+  <div class="brand"><a href="#/dashboard">☕ COFFEELINE</a></div>
+  <div class="userbox">
+    <span class="chip">👤 <span id="who">ผู้ใช้</span></span>
+    <button class="btn btn-ghost" onclick="logout()">ออกจากระบบ</button>
+  </div>
+</header>
+
+<!-- ======= DASHBOARD ======= -->
+<main id="view-dashboard" class="page">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><h3 id="kgToday">1,245</h3><p>กิโลกรัมวันนี้</p></div>
+      <div class="stat"><h3>98.5%</h3><p>คุณภาพผ่านเกณฑ์</p></div>
+      <div class="stat"><h3 id="ordersWait">15</h3><p>คำสั่งซื้อรอจัดส่ง</p></div>
+      <div class="stat"><h3>₿125K</h3><p>รายได้ประจำเดือน</p></div>
+    </div>
+
+    <div class="cards">
+      <!-- บันทึกข้อมูลเก็บเกี่ยว -->
+      <section class="card harvest">
+        <div class="hd"><span>🌱</span><strong>บันทึกข้อมูลเก็บเกี่ยว</strong></div>
+        <div class="li" onclick="go('harvest-record')"><span class="dot">▶</span>บันทึกข้อมูลการเก็บเกี่ยว</div>
+        <div class="li" onclick="go('raw-material-track')"><span class="dot">▶</span>ติดตามปริมาณวัตถุดิบเข้า</div>
+        <div class="li" onclick="go('bean-quality-check')"><span class="dot">▶</span>ตรวจสอบคุณภาพเมล็ด</div>
+      </section>
+
+      <!-- กระบวนการผลิต -->
+      <section class="card production">
+        <div class="hd"><span>⚙️</span><strong>กระบวนการผลิต</strong></div>
+        <div class="li" onclick="go('cleaning-record')"><span class="dot">▶</span>บันทึกการทำความสะอาด</div>
+        <div class="li" onclick="go('sorting-record')"><span class="dot">▶</span>บันทึกการคัดแยกเมล็ด</div>
+        <div class="li" onclick="go('resting-record')"><span class="dot">▶</span>บันทึกช่วงเวลาการพักเมล็ด</div>
+        <div class="li" onclick="go('hulling-roasting')"><span class="dot">▶</span>การกระเทาะเปลือกและคั่ว</div>
+      </section>
+
+      <!-- ควบคุมคุณภาพ -->
+      <section class="card quality">
+        <div class="hd"><span>🔍</span><strong>ควบคุมคุณภาพ</strong></div>
+        <div class="li" onclick="go('quality-inspection')"><span class="dot">▶</span>ตรวจสอบคุณภาพ</div>
+        <div class="li" onclick="go('material-tracking')"><span class="dot">▶</span>ติดตามปริมาณวัตถุดิบเข้า</div>
+        <div class="li" onclick="go('bean-quality')"><span class="dot">▶</span>ตรวจสอบคุณภาพเมล็ด</div>
+      </section>
+
+      <!-- คลังสินค้า -->
+      <section class="card warehouse">
+        <div class="hd"><span>📦</span><strong>คลังสินค้าและบรรจุภัณฑ์</strong></div>
+        <div class="li" onclick="go('warehouse-harvest')"><span class="dot">▶</span>บันทึกข้อมูลการเก็บเกี่ยว (คลัง)</div>
+        <div class="li" onclick="go('warehouse-tracking')"><span class="dot">▶</span>ติดตามปริมาณวัตถุดิบเข้า (คลัง)</div>
+        <div class="li" onclick="go('warehouse-quality')"><span class="dot">▶</span>ตรวจสอบคุณภาพเมล็ด (คลัง)</div>
+      </section>
+
+      <!-- คำสั่งซื้อ/เอกสาร -->
+      <section class="card order">
+        <div class="hd"><span>📋</span><strong>จัดการคำสั่งซื้อและเอกสาร</strong></div>
+        <div class="li" onclick="go('order-record')"><span class="dot">▶</span>บันทึกข้อมูลการสั่งซื้อ</div>
+        <div class="li" onclick="go('order-status')"><span class="dot">▶</span>ติดตามสถานะการสั่งซื้อ <span id="bdg-ord" class="badge">5</span></div>
+        <div class="li" onclick="go('documents')"><span class="dot">▶</span>จัดทำเอกสาร (ใบกำกับภาษี / ใบส่งของ)</div>
+        <div class="li" onclick="toggleChat(true)"><span class="dot">▶</span>การแจ้งเตือนแชทการสั่งซื้อจากลูกค้า <span id="bdg-chat" class="badge">3</span></div>
+      </section>
+
+      <!-- โลจิสติกส์ -->
+      <section class="card logistics">
+        <div class="hd"><span>🚛</span><strong>การขนส่งและโลจิสติกส์</strong></div>
+        <div class="li" onclick="go('transport-pickup')"><span class="dot">▶</span>รถขนส่งรับเมล็ดกาแฟ</div>
+        <div class="li" onclick="go('route-schedule')"><span class="dot">▶</span>บันทึกเส้นทางและวันที่จัดส่ง</div>
+        <div class="li" onclick="go('delivery-confirm')"><span class="dot">▶</span>ยืนยันการส่งให้โรงงาน</div>
+      </section>
+
+      <!-- รายงาน -->
+      <section class="card reports">
+        <div class="hd"><span>📈</span><strong>รายงานและวิเคราะห์</strong></div>
+        <div class="li" onclick="go('harvest-report')"><span class="dot">▶</span>รายงานข้อมูลการเก็บเกี่ยว</div>
+        <div class="li" onclick="go('material-report')"><span class="dot">▶</span>รายงานปริมาณวัตถุดิบ</div>
+        <div class="li" onclick="go('quality-report')"><span class="dot">▶</span>รายงานคุณภาพเมล็ด</div>
+        <div class="li" onclick="go('trend-analysis')"><span class="dot">▶</span>วิเคราะห์แนวโน้มการผลิตและการขาย</div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<!-- ======= GENERIC PAGE (ทุกเมนู) ======= -->
+<main id="view-page" class="page">
+  <div class="wrap">
+    <div class="crumbs"><a href="#/dashboard">หน้าแรก</a> › <span id="crumb">เมนู</span></div>
+    <div class="title">
+      <h2 id="page-title">ชื่อเมนู</h2>
+      <div>
+        <button class="btn" onclick="history.back()">ย้อนกลับ</button>
+        <button class="btn primary" onclick="savePage()">บันทึก</button>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <section class="form">
+        <h3 style="margin-bottom:8px">ฟอร์ม</h3>
+        <div id="form-area" class="g"></div>
+      </section>
+
+      <section>
+        <table class="table" id="tbl">
+          <thead><tr id="th"></tr></thead>
+          <tbody id="tb"></tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+</main>
+
+<!-- ======= CHAT DRAWER (เดิม) ======= -->
+<aside id="chat" class="drawer" aria-hidden="true">
+  <div class="hd"><strong>แจ้งเตือนแชทออเดอร์</strong><button class="btn danger" onclick="toggleChat(false)">ปิด</button></div>
+  <div id="chatBody" class="body"></div>
+  <div class="foot">
+    <input id="chatInput" placeholder="พิมพ์ข้อความ...">
+    <button class="btn primary" onclick="sendChat()">ส่ง</button>
+  </div>
+</aside>
+
+<script>
+/* ====== DATA: routes + field presets ====== */
+const routes = {
+  // 2.2.1
+  'harvest-record': {title:'บันทึกข้อมูลการเก็บเกี่ยว', fields:[
+    {k:'LotNumber', label:'รหัสล็อต'}, {k:'Date',label:'วันที่'}, {k:'BeanType',label:'ชนิดเมล็ด'}, {k:'WeightKg',label:'น้ำหนัก(กก.)'}
+  ], cols:['รหัส','วันที่','ชนิด','น้ำหนัก(กก.)']},
+  'raw-material-track': {title:'ติดตามปริมาณวัตถุดิบเข้า', fields:[
+    {k:'InboundDate',label:'วันที่รับเข้า'}, {k:'Supplier',label:'ผู้ส่งมอบ'}, {k:'QuantityKg',label:'ปริมาณ(กก.)'}
+  ], cols:['วันที่รับเข้า','ผู้ส่งมอบ','ปริมาณ(กก.)']},
+  'bean-quality-check': {title:'ตรวจสอบคุณภาพเมล็ด', fields:[
+    {k:'Moisture',label:'ความชื้น(%)'}, {k:'Defects',label:'สิ่งเจือปน(%)'}, {k:'Grade',label:'เกรด'}
+  ], cols:['ความชื้น(%)','สิ่งเจือปน(%)','เกรด']},
+
+  // 2.2.2
+  'cleaning-record': {title:'บันทึกการทำความสะอาด', fields:[
+    {k:'Start',label:'เวลาเริ่ม'}, {k:'End',label:'เวลาสิ้นสุด'}, {k:'Method',label:'วิธีทำความสะอาด'}
+  ], cols:['เวลาเริ่ม','เวลาสิ้นสุด','วิธี']},
+  'sorting-record': {title:'บันทึกการคัดแยกเมล็ด', fields:[
+    {k:'Batch',label:'เลขชุด'}, {k:'Method',label:'วิธีคัดแยก'}, {k:'OutputKg',label:'ผลผลิต(กก.)'}
+  ], cols:['เลขชุด','วิธีคัดแยก','ผลผลิต(กก.)']},
+  'resting-record': {title:'บันทึกช่วงเวลาการพักเมล็ด', fields:[
+    {k:'RestStart',label:'เริ่มพัก'}, {k:'RestEnd',label:'สิ้นสุดพัก'}, {k:'Temp',label:'อุณหภูมิ(°C)'}
+  ], cols:['เริ่มพัก','สิ้นสุดพัก','อุณหภูมิ']},
+  'hulling-roasting': {title:'การกระเทาะเปลือกและคั่ว', fields:[
+    {k:'RoastLevel',label:'ระดับการคั่ว'}, {k:'TimeMin',label:'เวลาคั่ว(นาที)'},{k:'Loss%',label:'Loss (%)'}
+  ], cols:['ระดับคั่ว','เวลาคั่ว(นาที)','Loss (%)']},
+
+  // 2.2.3
+  'quality-inspection': {title:'ตรวจสอบคุณภาพ', fields:[
+    {k:'Param',label:'พารามิเตอร์'}, {k:'Value',label:'ค่า'}, {k:'Result',label:'ผล'}
+  ], cols:['พารามิเตอร์','ค่า','ผล']},
+  'material-tracking': {title:'ติดตามปริมาณวัตถุดิบเข้า', fields:[
+    {k:'Date',label:'วันที่'}, {k:'Item',label:'รายการ'}, {k:'Qty',label:'จำนวน'}
+  ], cols:['วันที่','รายการ','จำนวน']},
+  'bean-quality': {title:'ตรวจสอบคุณภาพเมล็ด', fields:[
+    {k:'Sample',label:'ตัวอย่าง'}, {k:'Score',label:'คะแนน'}, {k:'Note',label:'หมายเหตุ'}
+  ], cols:['ตัวอย่าง','คะแนน','หมายเหตุ']},
+
+  // 2.2.4
+  'warehouse-harvest': {title:'บันทึกข้อมูลการเก็บเกี่ยว (คลัง)', fields:[
+    {k:'Ref',label:'อ้างอิงเก็บเกี่ยว'}, {k:'Loc',label:'ที่เก็บ'}, {k:'QtyKg',label:'ปริมาณ(กก.)'}
+  ], cols:['อ้างอิง','ที่เก็บ','ปริมาณ(กก.)']},
+  'warehouse-tracking': {title:'ติดตามปริมาณวัตถุดิบเข้า (คลัง)', fields:[
+    {k:'Date',label:'วันที่'}, {k:'Rack',label:'ชั้นวาง'}, {k:'Qty',label:'จำนวน'}
+  ], cols:['วันที่','ชั้นวาง','จำนวน']},
+  'warehouse-quality': {title:'ตรวจสอบคุณภาพเมล็ด (คลัง)', fields:[
+    {k:'Lot',label:'ล็อต'}, {k:'QC',label:'ผล QC'}, {k:'Expire',label:'วันหมดอายุ'}
+  ], cols:['ล็อต','ผล QC','วันหมดอายุ']},
+
+  // 2.2.5
+  'order-record': {title:'บันทึกข้อมูลการสั่งซื้อ', fields:[
+    {k:'OrderNo',label:'เลขที่สั่งซื้อ'}, {k:'Customer',label:'ชื่อลูกค้า'}, {k:'Amount',label:'ยอดรวม'}
+  ], cols:['เลขที่สั่งซื้อ','ลูกค้า','ยอดรวม']},
+  'order-status': {title:'ติดตามสถานะการสั่งซื้อ', fields:[
+    {k:'OrderNo',label:'เลขที่สั่งซื้อ'}, {k:'Status',label:'สถานะ'}, {k:'ETA',label:'กำหนดส่ง'}
+  ], cols:['เลขที่','สถานะ','กำหนดส่ง']},
+  'documents': {title:'จัดทำเอกสาร', fields:[
+    {k:'DocType',label:'ประเภทเอกสาร'}, {k:'IssueDate',label:'วันที่ออก'}, {k:'Ref',label:'อ้างอิง'}
+  ], cols:['ประเภท','วันที่ออก','อ้างอิง']},
+
+  // 2.2.6
+  'transport-pickup': {title:'รถขนส่งรับเมล็ดกาแฟ', fields:[
+    {k:'PickupID',label:'เลขรับของ'}, {k:'Driver',label:'คนขับ'}, {k:'Vehicle',label:'ทะเบียนรถ'}
+  ], cols:['เลขรับของ','คนขับ','ทะเบียน']},
+  'route-schedule': {title:'บันทึกเส้นทางและวันที่จัดส่ง', fields:[
+    {k:'Route',label:'เส้นทาง'}, {k:'ShipDate',label:'วันที่ส่ง'}, {k:'Stop',label:'จุดแวะ'}
+  ], cols:['เส้นทาง','วันที่ส่ง','จุดแวะ']},
+  'delivery-confirm': {title:'ยืนยันการส่งให้โรงงาน', fields:[
+    {k:'Ref',label:'เลขเอกสาร'}, {k:'Time',label:'เวลาส่งถึง'}, {k:'Receiver',label:'ผู้รับ'}
+  ], cols:['เลขเอกสาร','เวลาส่งถึง','ผู้รับ']},
+
+  // 2.2.7
+  'harvest-report': {title:'รายงานข้อมูลการเก็บเกี่ยว', fields:[
+    {k:'From',label:'จากวันที่'}, {k:'To',label:'ถึงวันที่'}, {k:'Type',label:'ชนิดเมล็ด'}
+  ], cols:['วันที่','ชนิด','ปริมาณ(กก.)']},
+  'material-report': {title:'รายงานปริมาณวัตถุดิบ', fields:[
+    {k:'From',label:'จากวันที่'}, {k:'To',label:'ถึงวันที่'}, {k:'Warehouse',label:'คลัง'}
+  ], cols:['วันที่','คลัง','คงเหลือ(กก.)']},
+  'quality-report': {title:'รายงานคุณภาพเมล็ด', fields:[
+    {k:'From',label:'จากวันที่'}, {k:'To',label:'ถึงวันที่'}, {k:'Metric',label:'ตัวชี้วัด'}
+  ], cols:['วันที่','ตัวชี้วัด','ค่าเฉลี่ย']},
+  'trend-analysis': {title:'วิเคราะห์แนวโน้มการผลิตและการขาย', fields:[
+    {k:'Period',label:'ช่วงเวลา'}, {k:'Metric',label:'ตัวชี้วัด'}, {k:'Compare',label:'เทียบกับ'}
+  ], cols:['ช่วงเวลา','ตัวชี้วัด','ผลวิเคราะห์']}
+};
+
+/* ====== AUTH ====== */
+const KEY='cl_user';
+function isAuthed(){return !!localStorage.getItem(KEY)}
+function doLogin(e){
+  e.preventDefault();
+  const u=document.getElementById('u').value.trim();
+  const p=document.getElementById('p').value;
+  if(!u||p.length<4){alert('กรอกข้อมูลให้ครบ');return false}
+  const role = (u.toLowerCase()==='admin')?'ผู้ดูแลระบบ':'พนักงาน';
+  localStorage.setItem(KEY, JSON.stringify({name:u,role}));
+  route('#/dashboard');
+  return false;
+}
+function fillDemo(){document.getElementById('u').value='admin';document.getElementById('p').value='1234'}
+function logout(){
+  localStorage.removeItem(KEY);
+  route('#/login');
+}
+
+/* ====== ROUTER ====== */
+window.addEventListener('hashchange', ()=>route(location.hash));
+function route(hash){
+  const h = hash || (isAuthed() ? '#/dashboard' : '#/login');
+  const [ , path, arg ] = h.split('/'); // '#','path','arg'
+  showView(path, arg);
+}
+function showView(view,arg){
+  // toggle header
+  document.getElementById('app-header').style.display = (view==='login')?'none':'flex';
+  // toggle pages
+  hideAll(['view-login','view-dashboard','view-page']);
+  if(view==='login'){document.getElementById('view-login').style.display='flex';return}
+  if(!isAuthed()){location.hash='#/login';return}
+  const u=JSON.parse(localStorage.getItem(KEY)||'{}');
+  document.getElementById('who').textContent = `${u.role} (${u.name})`;
+
+  if(view==='dashboard'){document.getElementById('view-dashboard').style.display='block';return}
+  if(view==='page'){ renderPage(arg); document.getElementById('view-page').style.display='block'; return}
+  // default
+  document.getElementById('view-dashboard').style.display='block';
+}
+function hideAll(ids){ids.forEach(id=>document.getElementById(id).style.display='none')}
+function go(code){ location.hash = `#/page/${code}`; }
+
+/* ====== PAGE RENDER ====== */
+function renderPage(code){
+  const cfg = routes[code];
+  const title = cfg? cfg.title : 'เมนู';
+  document.getElementById('page-title').textContent = title;
+  document.getElementById('crumb').textContent = title;
+
+  // build form
+  const fa = document.getElementById('form-area');
+  fa.innerHTML='';
+  (cfg?.fields||[]).forEach(f=>{
+    const box=document.createElement('div');
+    box.innerHTML = `<label>${f.label}</label><input id="f_${f.k}" placeholder="${f.label}">`;
+    fa.appendChild(box);
+  });
+
+  // build table header
+  const th=document.getElementById('th'); th.innerHTML='';
+  (cfg?.cols||[]).forEach(c=>{
+    const el=document.createElement('th'); el.textContent=c; th.appendChild(el);
+  });
+
+  // sample rows (mock)
+  const tb=document.getElementById('tb'); tb.innerHTML='';
+  for(let i=0;i<3;i++){
+    const tr=document.createElement('tr');
+    (cfg?.cols||[]).forEach((c,idx)=>{
+      const td=document.createElement('td');
+      td.innerHTML = idx===cfg.cols.length-1 && /ผล|สถานะ|คงเหลือ|ค่า|วิเคราะห์/.test(c)
+        ? `<span class="pill ${i%2? 'ok':'warn'}">${i%2? 'OK':'ตรวจสอบ'}</span>`
+        : `ตัวอย่าง ${i+1}`;
+      tr.appendChild(td);
+    });
+    tb.appendChild(tr);
+  }
+}
+function savePage(){
+  alert('บันทึกข้อมูล (เดโม่) — ในระบบจริงจะเรียก API');
+}
+
+/* ====== DASHBOARD DEMO UPDATES ====== */
+setInterval(()=>{
+  const el=document.getElementById('kgToday');
+  const v=parseInt(el.textContent.replace(/,/g,'')) + Math.floor(Math.random()*7);
+  el.textContent=v.toLocaleString();
+}, 4000);
+
+/* ====== CHAT DRAWER (ย่อ) ====== */
+const chatEl=document.getElementById('chat'), chatBody=document.getElementById('chatBody'), chatInput=document.getElementById('chatInput');
+function toggleChat(open){ chatEl.classList.toggle('open',!!open); chatEl.setAttribute('aria-hidden', open?'false':'true'); if(open) chatInput.focus() }
+function sendChat(){
+  const t=chatInput.value.trim(); if(!t) return;
+  addChat(`ฉัน: ${t}`); chatInput.value='';
+}
+function addChat(t){
+  const d=document.createElement('div'); d.style.background='#fff'; d.style.border='1px solid #eee'; d.style.padding='8px'; d.style.marginBottom='8px'; d.textContent=t;
+  chatBody.appendChild(d); chatBody.scrollTop=chatBody.scrollHeight;
+}
+// mock new msg
+setInterval(()=>{ addChat('ลูกค้า: ขอเช็คราคาวันนี้หน่อยค่ะ'); inc('bdg-chat') }, 20000);
+function inc(id){const el=document.getElementById(id); el.textContent = String(parseInt(el.textContent||'0',10)+1)}
+
+/* ====== INIT ====== */
+route(location.hash);
+
+/* ====== expose for inline buttons ====== */
+window.go=go; window.savePage=savePage; window.logout=logout; window.toggleChat=toggleChat;
+</script>
+</body>
+</html>
