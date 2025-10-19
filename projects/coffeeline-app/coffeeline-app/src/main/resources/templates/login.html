@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="th" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>COFFEELINE - Login</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brown:#8B4513;--brown2:#D2691E;--muted:#6c757d;--info:#0d6efd;
+  --bg1:#f5f7fa;--bg2:#c3cfe2;
+}
+html,body{height:100%;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 100%);min-height:100vh}
+
+.center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.login{width:100%;max-width:430px;background:#fff;border-radius:16px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,0.15)}
+.login h1{color:var(--brown);margin-bottom:4px;font-size:1.8rem}
+.login small{color:var(--muted);display:block;margin-bottom:16px}
+.row{display:flex;flex-direction:column;gap:4px;margin-top:14px}
+.row label{font-size:0.85rem;color:var(--muted);font-weight:600}
+.row input{padding:11px 14px;border:1px solid #dcdcdc;border-radius:10px;font-size:0.95rem;transition:all 0.2s}
+.row input:focus{outline:none;border-color:var(--info);box-shadow:0 0 0 3px rgba(13,110,253,0.1)}
+.row .hint{font-size:0.78rem;color:var(--muted);margin-top:2px}
+.btn-full{width:100%;padding:12px 14px;border:none;border-radius:12px;background:var(--brown);color:#fff;font-weight:600;margin-top:14px;font-size:0.95rem;cursor:pointer;transition:all 0.2s}
+.btn-full:hover{background:#6d3410;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.btn-full.secondary{background:var(--info);margin-top:10px}
+.btn-full.secondary:hover{background:#0a52cc}
+.alert{padding:12px;border-radius:8px;margin-top:14px;font-size:0.85rem;display:none}
+.alert.error{background:#ffe9e9;color:#8b0000;border:1px solid #f5c2c2}
+.alert.success{background:#e9f9ee;color:#177a33;border:1px solid #bff0c9}
+</style>
+</head>
+<body>
+<div class="center">
+  <form class="login" id="loginForm">
+    <h1>☕ COFFEELINE</h1>
+    <small>เข้าสู่ระบบเพื่อจัดการสายการผลิตกาแฟ</small>
+    
+    <div id="alertBox" class="alert"></div>
+    
+    <div class="row">
+      <label>ชื่อผู้ใช้</label>
+      <input id="username" name="username" placeholder="admin หรือ staff" required autocomplete="username">
+    </div>
+    <div class="row">
+      <label>รหัสผ่าน</label>
+      <input id="password" name="password" type="password" placeholder="อย่างน้อย 4 ตัวอักษร" minlength="4" required autocomplete="current-password">
+      <div class="hint">เดโม่: ใช้ user ใดก็ได้ (password อย่างน้อย 4 ตัวอักษร)</div>
+    </div>
+    <button class="btn-full" type="submit">เข้าสู่ระบบ</button>
+    <button class="btn-full secondary" type="button" onclick="fillDemo()">ใส่ข้อมูลเดโม่</button>
+  </form>
+</div>
+
+<script>
+function fillDemo() {
+  document.getElementById('username').value = 'admin';
+  document.getElementById('password').value = '1234';
+}
+
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const alertBox = document.getElementById('alertBox');
+  
+  try {
+    const response = await fetch('/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      alertBox.textContent = '✓ เข้าสู่ระบบสำเร็จ!';
+      alertBox.className = 'alert success';
+      alertBox.style.display = 'block';
+      setTimeout(() => {
+        window.location.href = '/dashboard';
+      }, 500);
+    } else {
+      alertBox.textContent = '✗ ' + (result.message || 'เข้าสู่ระบบไม่สำเร็จ');
+      alertBox.className = 'alert error';
+      alertBox.style.display = 'block';
+    }
+  } catch (error) {
+    alertBox.textContent = '✗ เกิดข้อผิดพลาด: ' + error.message;
+    alertBox.className = 'alert error';
+    alertBox.style.display = 'block';
+  }
+});
+</script>
+</body>
+</html>

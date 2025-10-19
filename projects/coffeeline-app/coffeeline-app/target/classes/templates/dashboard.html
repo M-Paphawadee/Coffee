@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="th" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>COFFEELINE - Dashboard</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brown:#8B4513;--brown2:#D2691E;--muted:#6c757d;--ok:#28a745;--warn:#ffc107;--danger:#dc3545;--info:#0d6efd;
+  --bg1:#f5f7fa;--bg2:#c3cfe2;
+}
+html,body{height:100%;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 100%);min-height:100vh}
+
+.header{background:linear-gradient(135deg,var(--brown) 0%,var(--brown2) 100%);color:#fff;padding:14px 80px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 18px rgba(0,0,0,0.1)}
+.brand{font-weight:700;font-size:1.3rem}
+.userbox{display:flex;gap:10px;align-items:center}
+.chip{background:rgba(255,255,255,.2);padding:6px 12px;border-radius:999px;font-size:0.9rem}
+.btn{border:none;border-radius:10px;padding:8px 14px;cursor:pointer;font-size:0.9rem;transition:all 0.2s}
+.btn:hover{opacity:.9;transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.25);color:#fff}
+
+.wrap{max-width:1200px;margin:0 auto;padding:20px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:20px}
+.stat{background:#fff;border-radius:14px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.08);text-align:center;transition:all 0.2s}
+.stat:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+.stat h3{color:var(--brown);font-size:1.6rem;margin-bottom:4px}
+.stat p{color:var(--muted);font-size:0.9rem}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:18px;margin-top:16px}
+.card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,0.08);border-left:5px solid var(--brown);transition:all 0.2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,0.12)}
+.card .hd{display:flex;gap:10px;align-items:center;border-bottom:1px solid #eee;padding-bottom:12px;margin-bottom:12px;font-size:1rem;font-weight:600}
+.card .hd span{font-size:1.4rem}
+
+.li{display:flex;gap:10px;align-items:center;background:#f8f9fa;border-radius:8px;padding:11px 12px;margin-top:8px;cursor:pointer;transition:all 0.2s;font-size:0.9rem}
+.li:hover{background:#eef1f4;transform:translateX(3px);box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.dot{color:var(--brown);font-weight:bold}
+.badge{margin-left:auto;background:var(--danger);color:#fff;border-radius:999px;padding:3px 8px;font-size:0.7rem;font-weight:700;min-width:20px;text-align:center}
+
+.harvest{border-left-color:#28a745}
+.production{border-left-color:#fd7e14}
+.quality{border-left-color:#dc3545}
+.warehouse{border-left-color:#6f42c1}
+.order{border-left-color:#007bff}
+.logistics{border-left-color:#20c997}
+.reports{border-left-color:#ffc107}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;place-items:center;z-index:100}
+.modal.show{display:grid}
+.modal-content{background:#fff;border-radius:16px;padding:30px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.modal-content h2{color:var(--brown);margin-bottom:15px}
+.modal-content p{color:#555;line-height:1.6;margin-bottom:20px}
+.modal-content button{background:var(--brown);color:#fff;border:none;padding:10px 24px;border-radius:10px;cursor:pointer;font-weight:600}
+.modal-content button:hover{background:#6d3410}
+
+@media(max-width:768px){
+  .header{padding:14px 16px}
+  .wrap{padding:14px}
+  .stats{grid-template-columns:1fr 1fr}
+  .cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="brand">☕ COFFEELINE</div>
+  <div class="userbox">
+    <span class="chip">👤 <span th:text="${user.name}">ผู้ใช้</span></span>
+    <button class="btn btn-ghost" onclick="location.href='/logout'">ออกจากระบบ</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="stats">
+    <div class="stat">
+      <h3 id="kgToday">1,247</h3>
+      <p>กิโลกรัมวันนี้</p>
+    </div>
+    <div class="stat">
+      <h3>94.5%</h3>
+      <p>คุณภาพผ่านเกณฑ์</p>
+    </div>
+    <div class="stat">
+      <h3 id="ordersWait">23</h3>
+      <p>คำสั่งซื้อรอจัดส่ง</p>
+    </div>
+    <div class="stat">
+      <h3>฿847K</h3>
+      <p>รายได้เดือนนี้</p>
+    </div>
+  </div>
+
+  <div class="cards">
+    <section class="card harvest">
+      <div class="hd"><span>🌱</span><strong>การเก็บเกี่ยว</strong></div>
+      <div class="li" onclick="showAlert('บันทึกข้อมูลการเก็บเกี่ยว')"><span class="dot">▶</span>บันทึกข้อมูลการเก็บเกี่ยว</div>
+      <div class="li" onclick="showAlert('ติดตามวัตถุดิบเข้า')"><span class="dot">▶</span>ติดตามวัตถุดิบเข้า</div>
+      <div class="li" onclick="showAlert('ตรวจสอบคุณภาพเมล็ด')"><span class="dot">▶</span>ตรวจสอบคุณภาพเมล็ด</div>
+    </section>
+
+    <section class="card production">
+      <div class="hd"><span>⚙️</span><strong>การผลิต</strong></div>
+      <div class="li" onclick="showAlert('บันทึกการทำความสะอาด')"><span class="dot">▶</span>บันทึกการทำความสะอาด</div>
+      <div class="li" onclick="showAlert('บันทึกการคัดแยก')"><span class="dot">▶</span>บันทึกการคัดแยก</div>
+      <div class="li" onclick="showAlert('บันทึกการพักเมล็ด')"><span class="dot">▶</span>บันทึกการพักเมล็ด</div>
+      <div class="li" onclick="showAlert('การปอกคั่ว')"><span class="dot">▶</span>การปอกคั่ว</div>
+    </section>
+
+    <section class="card quality">
+      <div class="hd"><span>🔍</span><strong>การควบคุมคุณภาพ</strong></div>
+      <div class="li" onclick="showAlert('บันทึกการตรวจสอบคุณภาพ')"><span class="dot">▶</span>บันทึกการตรวจสอบคุณภาพ</div>
+      <div class="li" onclick="showAlert('ติดตามวัสดุผลิต')"><span class="dot">▶</span>ติดตามวัสดุผลิต</div>
+      <div class="li" onclick="showAlert('ตรวจสอบคุณภาพเมล็ด')"><span class="dot">▶</span>ตรวจสอบคุณภาพเมล็ด</div>
+    </section>
+
+    <section class="card warehouse">
+      <div class="hd"><span>📦</span><strong>คลังสินค้า</strong></div>
+      <div class="li" onclick="showAlert('บันทึกเก็บเกี่ยว (คลัง)')"><span class="dot">▶</span>บันทึกเก็บเกี่ยว (คลัง)</div>
+      <div class="li" onclick="showAlert('ติดตามสินค้า (คลัง)')"><span class="dot">▶</span>ติดตามสินค้า (คลัง)</div>
+      <div class="li" onclick="showAlert('ตรวจสอบคุณภาพ (คลัง)')"><span class="dot">▶</span>ตรวจสอบคุณภาพ (คลัง)</div>
+    </section>
+
+    <section class="card order">
+      <div class="hd"><span>📋</span><strong>คำสั่งซื้อ</strong></div>
+      <div class="li" onclick="showAlert('บันทึกคำสั่งซื้อ')"><span class="dot">▶</span>บันทึกคำสั่งซื้อ</div>
+      <div class="li" onclick="showAlert('ติดตามสถานะคำสั่งซื้อ')"><span class="dot">▶</span>ติดตามสถานะคำสั่งซื้อ <span class="badge">23</span></div>
+      <div class="li" onclick="showAlert('จัดทำเอกสาร')"><span class="dot">▶</span>จัดทำเอกสาร</div>
+      <div class="li" onclick="showAlert('การแจ้งเตือนแชทลูกค้า')"><span class="dot">▶</span>การแจ้งเตือนแชทลูกค้า <span class="badge">5</span></div>
+    </section>
+
+    <section class="card logistics">
+      <div class="hd"><span>🚛</span><strong>การขนส่ง</strong></div>
+      <div class="li" onclick="showAlert('จัดการรับสินค้า')"><span class="dot">▶</span>จัดการรับสินค้า</div>
+      <div class="li" onclick="showAlert('กำหนดเส้นทางจัดส่ง')"><span class="dot">▶</span>กำหนดเส้นทางจัดส่ง</div>
+      <div class="li" onclick="showAlert('ยืนยันการจัดส่ง')"><span class="dot">▶</span>ยืนยันการจัดส่ง</div>
+    </section>
+
+    <section class="card reports">
+      <div class="hd"><span>📈</span><strong>รายงาน</strong></div>
+      <div class="li" onclick="showAlert('รายงานการเก็บเกี่ยว')"><span class="dot">▶</span>รายงานการเก็บเกี่ยว</div>
+      <div class="li" onclick="showAlert('รายงานวัตถุดิบ')"><span class="dot">▶</span>รายงานวัตถุดิบ</div>
+      <div class="li" onclick="showAlert('รายงานคุณภาพ')"><span class="dot">▶</span>รายงานคุณภาพ</div>
+      <div class="li" onclick="showAlert('วิเคราะห์แนวโน้ม')"><span class="dot">▶</span>วิเคราะห์แนวโน้ม</div>
+    </section>
+  </div>
+</main>
+
+<div id="modal" class="modal" onclick="closeModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h2 id="modalTitle">📌 ฟีเจอร์</h2>
+    <p id="modalText">ฟีเจอร์นี้พร้อมใช้งาน</p>
+    <button onclick="closeModal()">ปิด</button>
+  </div>
+</div>
+
+<script>
+setInterval(() => {
+  const el = document.getElementById('kgToday');
+  const v = parseInt(el.textContent.replace(/,/g,'')) + Math.floor(Math.random()*7);
+  el.textContent = v.toLocaleString();
+}, 4000);
+
+function showAlert(feature) {
+  document.getElementById('modalTitle').textContent = '📌 ' + feature;
+  document.getElementById('modalText').textContent = 'ฟีเจอร์ "' + feature + '" พร้อมใช้งาน! คุณสามารถพัฒนาต่อได้ตามต้องการ';
+  document.getElementById('modal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+}
+</script>
+</body>
+</html>

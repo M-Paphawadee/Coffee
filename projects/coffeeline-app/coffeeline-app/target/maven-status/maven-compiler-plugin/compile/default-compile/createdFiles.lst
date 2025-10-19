@@ -1,0 +1,7 @@
+com\coffeeline\controller\MainController.class
+com\coffeeline\repository\RecordRepository.class
+com\coffeeline\CoffeelineApplication.class
+com\coffeeline\service\RecordService.class
+com\coffeeline\model\User.class
+com\coffeeline\controller\RecordsApiController.class
+com\coffeeline\model\Record.class
