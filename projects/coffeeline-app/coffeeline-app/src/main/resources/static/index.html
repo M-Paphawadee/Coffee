@@ -13,63 +13,68 @@
   html,body{height:100%;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 100%);min-height:100vh}
   a{color:inherit;text-decoration:none}
 
-  /* Toast */
+  /* ===== Toast ===== */
   .toast-container{position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;max-width:400px}
-  .toast{background:#fff;padding:12px 14px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);min-width:280px;border-left:5px solid #4caf50}
+  .toast{background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.3);min-width:320px;animation:slideIn .25s ease-out;border-left:5px solid #4caf50}
   .toast.error{border-left-color:#f44336}
-  .toast .t-hd{display:flex;justify-content:space-between;gap:8px;margin-bottom:6px;font-weight:700}
-  .toast .t-msg{font-size:13px;color:#555}
+  .toast-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .toast-title{font-weight:700;font-size:14px}
+  .toast-close{background:none;border:none;font-size:20px;color:#999;cursor:pointer}
+  .toast-body{font-size:13px;color:#555}
+  @keyframes slideIn{from{transform:translateX(420px);opacity:0}to{transform:translateX(0);opacity:1}}
+  @keyframes slideOut{from{transform:translateX(0);opacity:1}to{transform:translateX(420px);opacity:0}}
 
-  /* Header */
+  /* ===== Header ===== */
   .header{display:none;background:linear-gradient(135deg,var(--brown) 0%,var(--brown2) 100%);color:#fff;padding:14px 80px;align-items:center;justify-content:space-between;box-shadow:0 6px 18px rgba(0,0,0,0.1);z-index:40}
   .brand{font-weight:700;font-size:1.3rem}
   .brand a{color:#fff}
   .userbox{display:flex;gap:10px;align-items:center}
   .chip{background:rgba(255,255,255,.2);padding:6px 12px;border-radius:999px;font-size:0.9rem}
-  .btn{border:none;border-radius:10px;padding:8px 12px;cursor:pointer;font-size:0.9rem;transition:all .2s;background:#eef2ff}
-  .btn:hover{opacity:.9;transform:translateY(-1px)}
+  .btn{border:none;border-radius:10px;padding:8px 14px;cursor:pointer;font-size:0.9rem;transition:all 0.2s;background:#eef2ff}
+  .btn:hover{opacity:.95;transform:translateY(-1px)}
+  .btn-ghost{background:rgba(255,255,255,.25);color:#fff}
   .btn.primary{background:var(--info);color:#fff}
-  .btn.danger{background:var(--danger);color:#fff}
-  .btn.excel{background:#2ebd59;color:#fff}
+  .btn.primary:hover{background:#0a52cc}
   .btn.csv{background:#6c757d;color:#fff}
+  .btn.csv:hover{background:#545b62}
 
   .wrap{max-width:1200px;margin:0 auto;padding:20px}
   .page{display:none;min-height:calc(100vh - 72px)}
 
-  /* Login */
+  /* ===== Login ===== */
   .center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
   .login{width:100%;max-width:430px;background:#fff;border-radius:16px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,0.15)}
   .login h1{color:var(--brown);margin-bottom:4px;font-size:1.8rem}
+  .login small{color:var(--muted);display:block;margin-bottom:16px}
   .row{display:flex;flex-direction:column;gap:4px;margin-top:14px}
   .row label{font-size:0.85rem;color:var(--muted);font-weight:600}
   .row input{padding:11px 14px;border:1px solid #dcdcdc;border-radius:10px;font-size:0.95rem}
+  .btn-full{width:100%;padding:12px 14px;border:none;border-radius:12px;background:var(--brown);color:#fff;font-weight:600;margin-top:14px;font-size:0.95rem;cursor:pointer}
+  .btn-full.secondary{background:var(--info)}
 
-  /* Stats + Cards */
+  /* ===== Stats ===== */
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:20px}
   .stat{background:#fff;border-radius:14px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.08);text-align:center}
+  .stat h3{color:var(--brown);font-size:1.6rem}
+
+  /* ===== Cards ===== */
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:18px;margin-top:16px}
   .card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,0.08);border-left:5px solid var(--brown)}
   .card .hd{display:flex;gap:10px;align-items:center;border-bottom:1px solid #eee;padding-bottom:12px;margin-bottom:12px;font-size:1rem;font-weight:600}
   .li{display:flex;gap:10px;align-items:center;background:#f8f9fa;border-radius:8px;padding:11px 12px;margin-top:8px;cursor:pointer}
-  .dot{color:var(--brown);font-weight:bold}
   .badge{margin-left:auto;background:var(--danger);color:#fff;border-radius:999px;padding:3px 8px;font-size:0.7rem;font-weight:700;min-width:20px;text-align:center}
   .harvest{border-left-color:#28a745}.production{border-left-color:#fd7e14}.quality{border-left-color:#dc3545}.warehouse{border-left-color:#6f42c1}.order{border-left-color:#007bff}.logistics{border-left-color:#20c997}.reports{border-left-color:#ffc107}
 
-  /* Generic page */
+  /* ===== Generic Page ===== */
   .crumbs{font-size:0.85rem;color:var(--muted);margin-bottom:12px}
-  .title{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;flex-wrap:wrap}
-  .actions{display:flex;gap:8px;align-items:center}
-  select.btn{background:#fff;border:1px solid #e5e7eb}
-
+  .title{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;flex-wrap:wrap}
   .grid2{display:grid;grid-template-columns:1fr 1.5fr;gap:14px}
   @media(max-width:1024px){.grid2{grid-template-columns:1fr}}
   .form{background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
   .form .g{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:768px){.form .g{grid-template-columns:1fr}}
   .form label{font-size:0.85rem;color:var(--muted);font-weight:600;display:block;margin-bottom:4px}
-  .form input,.form select,.form textarea{width:100%;padding:10px 12px;border:1px solid #dcdcdc;border-radius:10px}
-  .form textarea{grid-column:1/-1;min-height:100px}
-
+  .form input,.form select,.form textarea{width:100%;padding:10px 12px;border:1px solid #dcdcdc;border-radius:10px;font-size:0.9rem}
   .table-container{background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,0.08);overflow:hidden}
   .table{width:100%;border-collapse:collapse;font-size:0.9rem}
   .table th{background:#f8f9fa;padding:12px;border-bottom:2px solid #dcdcdc;text-align:left;font-weight:600;color:#333}
@@ -78,34 +83,29 @@
   .pill.ok{background:#e9f9ee;color:#177a33;border-color:#bff0c9}
   .pill.warn{background:#fff6dd;color:#9b7b0a;border-color:#ffe193}
 
-  /* Drawer chat */
-  .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0);z-index:40;transition:background .35s;pointer-events:none}
-  .overlay.open{background:rgba(0,0,0,.3);pointer-events:auto}
-  .drawer{position:fixed;top:0;right:-420px;width:420px;max-width:100vw;height:100vh;background:#fff;box-shadow:-6px 0 24px rgba(0,0,0,0.15);transition:right .35s ease-out;z-index:50;display:flex;flex-direction:column;border-left:4px solid var(--info)}
+  /* ===== Report Layout ===== */
+  .r-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .r-grid{display:grid;grid-template-columns:360px 1fr;gap:18px}
+  @media(max-width:1024px){.r-grid{grid-template-columns:1fr}}
+  .r-card{background:#fff;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.08);padding:18px}
+
+  /* ===== Chat Drawer ===== */
+  .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0);z-index:40;transition:background 0.35s;pointer-events:none}
+  .overlay.open{background:rgba(0,0,0,0.3);pointer-events:auto}
+  .drawer{position:fixed;top:0;right:-420px;width:420px;max-width:100vw;height:100vh;background:#fff;box-shadow:-6px 0 24px rgba(0,0,0,0.15);transition:right 0.35s ease-out;z-index:50;display:flex;flex-direction:column;border-left:4px solid var(--info)}
   .drawer.open{right:0}
   .drawer .hd{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:linear-gradient(135deg,var(--info),#57a0ff);color:#fff;font-weight:600}
   .drawer .body{padding:14px;overflow-y:auto;flex:1;background:#f6f8fb}
-  .drawer .msg{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:0.9rem}
-  .drawer .msg.mine{background:#e7f1ff;margin-left:20px}
+  .drawer .msg{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:0.85rem;line-height:1.4}
+  .drawer .msg.mine{background:#e7f1ff;margin-left:20px;text-align:right}
   .drawer .foot{padding:12px 14px;border-top:1px solid #e0e0e0;display:flex;gap:8px}
-
-  /* Modals */
-  .m-ov{position:fixed;inset:0;background:#0006;display:none;place-items:center;padding:16px;z-index:60}
-  .m-ov.show{display:grid}
-  .m{background:#fff;border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,.2);max-width:520px;width:100%;padding:20px}
-  .m .m-title{font-weight:700;margin-bottom:10px}
-
-  @media(max-width:768px){
-    .header{padding:14px 16px}
-    .wrap{padding:14px}
-    .cards{grid-template-columns:1fr}
-  }
+  .drawer input{flex:1;padding:10px 12px;border:1px solid #dcdcdc;border-radius:10px;font-size:0.9rem}
 </style>
 </head>
 <body>
 
 <!-- Toast -->
-<div id="toasts" class="toast-container"></div>
+<div class="toast-container" id="toastContainer"></div>
 
 <!-- LOGIN -->
 <div id="view-login" class="center">
@@ -119,10 +119,10 @@
     <div class="row">
       <label>รหัสผ่าน</label>
       <input id="p" type="password" placeholder="อย่างน้อย 4 ตัวอักษร" minlength="4" required>
-      <div style="font-size:12px;color:#777;margin-top:4px">เดโม่: ใช้ user ใดก็ได้ ระบบจะจำสิทธิ์ไว้ในเบราว์เซอร์</div>
+      <div class="hint" style="color:#6c757d">เดโม่: ใช้ user ใดก็ได้ ระบบจะจำสิทธิ์ไว้ในเบราว์เซอร์</div>
     </div>
-    <button class="btn primary" type="submit" style="width:100%;margin-top:12px">เข้าสู่ระบบ</button>
-    <button class="btn" type="button" onclick="fillDemo()" style="width:100%;margin-top:8px">ใส่ข้อมูลเดโม่</button>
+    <button class="btn-full" type="submit">เข้าสู่ระบบ</button>
+    <button class="btn-full secondary" type="button" onclick="fillDemo()">ใส่ข้อมูลเดโม่</button>
   </form>
 </div>
 
@@ -131,8 +131,11 @@
   <div class="brand"><a href="#/dashboard">☕ COFFEELINE</a></div>
   <div class="userbox">
     <span class="chip">👤 <span id="who">ผู้ใช้</span></span>
-    <button class="btn" onclick="toggleChat(true)">แชทลูกค้า</button>
-    <button class="btn danger" onclick="logout()">ออกจากระบบ</button>
+    <button class="btn btn-ghost" onclick="toggleChat(true)" style="position:relative">
+      แชทลูกค้า
+      <span id="bdg-chat" class="badge" style="position:absolute;top:-8px;right:-8px;background:#dc3545;display:none">0</span>
+    </button>
+    <button class="btn btn-ghost" onclick="logout()">ออกจากระบบ</button>
   </div>
 </header>
 
@@ -141,61 +144,54 @@
   <div class="wrap">
     <div class="stats">
       <div class="stat"><h3 id="kgToday">1,247</h3><p>กิโลกรัมวันนี้</p></div>
-      <div class="stat"><h3>94.5%</h3><p>คุณภาพผ่านเกณฑ์</p></div>
+      <div class="stat"><h3 id="qRate">94.5%</h3><p>คุณภาพผ่านเกณฑ์</p></div>
       <div class="stat"><h3 id="ordersWait">23</h3><p>คำสั่งซื้อรอจัดส่ง</p></div>
-      <div class="stat"><h3>฿847K</h3><p>รายได้เดือนนี้</p></div>
+      <div class="stat"><h3 id="revMonth">฿847K</h3><p>รายได้เดือนนี้</p></div>
     </div>
-
     <div class="cards">
       <section class="card harvest">
         <div class="hd"><span>🌱</span><strong>การเก็บเกี่ยว</strong></div>
-        <div class="li" onclick="go('harvest-record')"><span class="dot">▶</span>บันทึกข้อมูลการเก็บเกี่ยว</div>
-        <div class="li" onclick="go('raw-material-track')"><span class="dot">▶</span>ติดตามวัตถุดิบเข้า</div>
-        <div class="li" onclick="go('bean-quality-check')"><span class="dot">▶</span>ตรวจสอบคุณภาพเมล็ด</div>
+        <div class="li" onclick="go('harvest-record')">▶ บันทึกข้อมูลการเก็บเกี่ยว</div>
+        <div class="li" onclick="go('raw-material-track')">▶ ติดตามวัตถุดิบเข้า</div>
+        <div class="li" onclick="go('bean-quality-check')">▶ ตรวจสอบคุณภาพเมล็ด</div>
       </section>
-
       <section class="card production">
         <div class="hd"><span>⚙️</span><strong>การผลิต</strong></div>
-        <div class="li" onclick="go('cleaning-record')"><span class="dot">▶</span>บันทึกการทำความสะอาด</div>
-        <div class="li" onclick="go('sorting-record')"><span class="dot">▶</span>บันทึกการคัดแยก</div>
-        <div class="li" onclick="go('resting-record')"><span class="dot">▶</span>บันทึกการพักเมล็ด</div>
-        <div class="li" onclick="go('hulling-roasting')"><span class="dot">▶</span>การปอกคั่ว</div>
+        <div class="li" onclick="go('cleaning-record')">▶ บันทึกการทำความสะอาด</div>
+        <div class="li" onclick="go('sorting-record')">▶ บันทึกการคัดแยก</div>
+        <div class="li" onclick="go('resting-record')">▶ บันทึกการพักเมล็ด</div>
+        <div class="li" onclick="go('hulling-roasting')">▶ การปอกคั่ว</div>
       </section>
-
       <section class="card quality">
         <div class="hd"><span>🔍</span><strong>การควบคุมคุณภาพ</strong></div>
-        <div class="li" onclick="go('quality-inspection')"><span class="dot">▶</span>บันทึกการตรวจสอบคุณภาพ</div>
-        <div class="li" onclick="go('material-tracking')"><span class="dot">▶</span>ติดตามวัสดุผลิต</div>
-        <div class="li" onclick="go('bean-quality')"><span class="dot">▶</span>ตรวจสอบคุณภาพเมล็ด</div>
+        <div class="li" onclick="go('quality-inspection')">▶ บันทึกการตรวจสอบคุณภาพ</div>
+        <div class="li" onclick="go('material-tracking')">▶ ติดตามวัสดุผลิต</div>
+        <div class="li" onclick="go('bean-quality')">▶ ตรวจสอบคุณภาพเมล็ด</div>
       </section>
-
       <section class="card warehouse">
         <div class="hd"><span>📦</span><strong>คลังสินค้า</strong></div>
-        <div class="li" onclick="go('warehouse-harvest')"><span class="dot">▶</span>บันทึกเก็บเกี่ยว (คลัง)</div>
-        <div class="li" onclick="go('warehouse-tracking')"><span class="dot">▶</span>ติดตามสินค้า (คลัง)</div>
-        <div class="li" onclick="go('warehouse-quality')"><span class="dot">▶</span>ตรวจสอบคุณภาพ (คลัง)</div>
+        <div class="li" onclick="go('warehouse-harvest')">▶ บันทึกเก็บเกี่ยว (คลัง)</div>
+        <div class="li" onclick="go('warehouse-tracking')">▶ ติดตามสินค้า (คลัง)</div>
+        <div class="li" onclick="go('warehouse-quality')">▶ ตรวจสอบคุณภาพ (คลัง)</div>
       </section>
-
       <section class="card order">
         <div class="hd"><span>📋</span><strong>คำสั่งซื้อ</strong></div>
-        <div class="li" onclick="go('order-record')"><span class="dot">▶</span>บันทึกคำสั่งซื้อ</div>
-        <div class="li" onclick="go('order-status')"><span class="dot">▶</span>ติดตามสถานะคำสั่งซื้อ <span id="bdg-ord" class="badge">23</span></div>
-        <div class="li" onclick="go('documents')"><span class="dot">▶</span>จัดทำเอกสาร</div>
+        <div class="li" onclick="go('order-record')">▶ บันทึกคำสั่งซื้อ</div>
+        <div class="li" onclick="go('order-status')">▶ ติดตามสถานะคำสั่งซื้อ <span id="bdg-ord" class="badge">23</span></div>
+        <div class="li" onclick="go('documents')">▶ จัดทำเอกสาร</div>
       </section>
-
       <section class="card logistics">
         <div class="hd"><span>🚛</span><strong>การขนส่ง</strong></div>
-        <div class="li" onclick="go('transport-pickup')"><span class="dot">▶</span>จัดการรับสินค้า</div>
-        <div class="li" onclick="go('route-schedule')"><span class="dot">▶</span>กำหนดเส้นทางจัดส่ง</div>
-        <div class="li" onclick="go('delivery-confirm')"><span class="dot">▶</span>ยืนยันการจัดส่ง</div>
+        <div class="li" onclick="go('transport-pickup')">▶ จัดการรับสินค้า</div>
+        <div class="li" onclick="go('route-schedule')">▶ กำหนดเส้นทางจัดส่ง</div>
+        <div class="li" onclick="go('delivery-confirm')">▶ ยืนยันการจัดส่ง</div>
       </section>
-
       <section class="card reports">
         <div class="hd"><span>📈</span><strong>รายงาน</strong></div>
-        <div class="li" onclick="go('harvest-report')"><span class="dot">▶</span>รายงานการเก็บเกี่ยว</div>
-        <div class="li" onclick="go('material-report')"><span class="dot">▶</span>รายงานวัตถุดิบ</div>
-        <div class="li" onclick="go('quality-report')"><span class="dot">▶</span>รายงานคุณภาพ</div>
-        <div class="li" onclick="go('trend-analysis')"><span class="dot">▶</span>วิเคราะห์แนวโน้ม</div>
+        <div class="li" onclick="go('harvest-report')">▶ รายงานการเก็บเกี่ยว</div>
+        <div class="li" onclick="go('material-report')">▶ รายงานวัตถุดิบ</div>
+        <div class="li" onclick="go('quality-report')">▶ รายงานคุณภาพ</div>
+        <div class="li" onclick="go('trend-analysis')">▶ วิเคราะห์แนวโน้ม</div>
       </section>
     </div>
   </div>
@@ -207,7 +203,8 @@
     <div class="crumbs"><a onclick="location.hash='#/dashboard'">หน้าแรก</a> › <span id="crumb">เมนู</span></div>
     <div class="title">
       <h2 id="page-title">ชื่อเมนู</h2>
-      <div class="actions">
+      <div class="actions" id="actions">
+        <!-- ช่วงเวลา -->
         <select id="quickRange" class="btn">
           <option value="this_month">เดือนนี้</option>
           <option value="this_quarter">ไตรมาสนี้</option>
@@ -217,18 +214,17 @@
           <option value="last_365">ย้อนหลัง 1 ปี</option>
           <option value="all">ทั้งหมด</option>
         </select>
-        <button class="btn" onclick="analyzeCurrent()">วิเคราะห์</button>
         <button class="btn csv" onclick="exportCurrentTable()">Export CSV</button>
         <button class="btn primary" onclick="savePage()">บันทึก</button>
       </div>
     </div>
 
-    <div id="generic-grid" class="grid2">
+    <!-- ฟอร์ม + ตาราง -->
+    <div class="grid2" id="generic-grid">
       <section class="form">
         <h3>ฟอร์มข้อมูล</h3>
         <div id="form-area" class="g"></div>
       </section>
-
       <section>
         <div class="table-container">
           <table class="table" id="tbl">
@@ -239,770 +235,857 @@
       </section>
     </div>
 
-    <!-- REPORT LAYOUT -->
+    <!-- รายงาน -->
     <div id="report-container" style="display:none">
-      <section class="form" style="margin-bottom:14px">
-        <h3>ตัวกรองรายงาน</h3>
-        <div class="g">
-          <div>
-            <label>จากวันที่</label>
-            <input id="f_from" type="date">
-          </div>
-          <div>
-            <label>ถึงวันที่</label>
-            <input id="f_to" type="date">
-          </div>
-          <div>
-            <label>ชนิดเมล็ด/ตัวชี้วัด (ถ้ามี)</label>
-            <select id="f_metric">
-              <option value="">ทั้งหมด</option>
-              <option value="Arabica">Arabica</option>
-              <option value="Robusta">Robusta</option>
-              <option value="Moisture">ความชื้น</option>
-              <option value="Defects">สิ่งเจือปน</option>
-              <option value="Grade">เกรด</option>
-            </select>
-          </div>
+      <div class="r-title">
+        <h2 id="r-title">รายงาน</h2>
+        <div>
+          <select id="quickRangeReport" class="btn" style="margin-right:6px">
+            <option value="this_month">เดือนนี้</option>
+            <option value="this_quarter">ไตรมาสนี้</option>
+            <option value="this_year">ปีนี้</option>
+            <option value="last_30">ย้อนหลัง 30 วัน</option>
+            <option value="last_90">ย้อนหลัง 90 วัน</option>
+            <option value="last_365">ย้อนหลัง 1 ปี</option>
+            <option value="all">ทั้งหมด</option>
+          </select>
+          <button class="btn csv" onclick="exportReportCSV()">Export CSV</button>
+          <button class="btn primary" id="r-analyze">วิเคราะห์</button>
         </div>
-        <div class="actions" style="margin-top:10px">
-          <button id="r-analyze" class="btn">วิเคราะห์</button>
-          <button class="btn csv" onclick="exportCurrentTable()">Export CSV</button>
-        </div>
-      </section>
-
-      <section class="table-container">
-        <table class="table" id="rtbl">
-          <thead><tr id="rth"></tr></thead>
-          <tbody id="rtb"></tbody>
-        </table>
-      </section>
-
-      <section class="form" style="margin-top:14px">
-        <h3>สรุปรายงาน</h3>
-        <div id="r-summary" style="margin-top:8px;color:#333"></div>
-      </section>
+      </div>
+      <div class="r-grid">
+        <section class="r-card r-filter" id="r-filter"></section>
+        <section class="r-card">
+          <h3 id="r-chart-title" style="margin-bottom:10px"></h3>
+          <div class="chart-wrap"><canvas id="r-chart" height="280"></canvas></div>
+          <div id="r-summary" style="margin-top:12px;color:#374151;font-weight:600"></div>
+        </section>
+      </div>
     </div>
   </div>
 </main>
 
-<!-- OVERLAY + CHAT -->
+<!-- CHAT -->
 <div id="overlay" class="overlay" onclick="toggleChat(false)"></div>
 <aside id="chat" class="drawer" aria-hidden="true">
   <div class="hd">
     <strong>💬 แจ้งเตือนแชทลูกค้า</strong>
-    <button class="btn danger" style="padding:6px 12px" onclick="toggleChat(false)">ปิด</button>
+    <button class="btn" style="padding:6px 12px" onclick="toggleChat(false)">ปิด</button>
   </div>
   <div id="chatBody" class="body"></div>
   <div class="foot">
     <input id="chatInput" placeholder="พิมพ์ข้อความ...">
-    <button class="btn primary" style="white-space:nowrap" onclick="sendChat()">ส่ง</button>
+    <button class="btn primary" style="padding:10px 16px;white-space:nowrap" onclick="sendChat()">ส่ง</button>
   </div>
 </aside>
 
-<!-- MODALS -->
-<div id="okOv" class="m-ov" aria-hidden="true">
-  <div class="m" role="dialog"><div class="m-title">บันทึกข้อมูลสำเร็จ</div>
-    <div>ข้อมูลถูกบันทึกแล้ว</div>
-    <div style="text-align:right;margin-top:12px"><button class="btn primary" onclick="closeModal(okOv)">ตกลง</button></div>
-  </div>
-</div>
-<div id="errOv" class="m-ov" aria-hidden="true">
-  <div class="m" role="dialog"><div class="m-title">เกิดข้อผิดพลาด</div>
-    <pre id="errBox" style="white-space:pre-wrap"></pre>
-    <div style="text-align:right;margin-top:12px"><button class="btn primary" onclick="closeModal(errOv)">ปิด</button></div>
-  </div>
-</div>
-
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
-/* ===================== CONFIG & STATE ===================== */
-const KEY_USER='cl_user';
-const KEY_DATA='coffeeline_records';     // ทุกหน้าเก็บที่นี่
-const KEY_CHAT='coffeeline_chat';        // ประวัติแชท
-let currentCode=null;
-let savedRecords={};  // {routeCode: [ { ...fields } ]}
+/* ======================= CONFIG ======================= */
+const API_BASE = ""; // ถ้ามี backend ให้ใส่ base URL (เช่น http://localhost:8080)
+const STORAGE_USER = 'cl_user';
+const STORAGE_RECORDS = 'coffeeline_records_v2'; // เวอร์ชันใหม่
+let savedRecords = {};
+let currentCode = null;
+let chartInst = null;
 
-/* ===================== ROUTES (ทุกหน้ามีพร้อม) ===================== */
-const routes={
+/* =================== ROUTE DEFINITIONS =================== */
+const routes = {
   'harvest-record': {title:'บันทึกข้อมูลการเก็บเกี่ยว', fields:[
-    {k:'LotNumber',label:'หมายเลขล็อต',type:'text'},
+    {k:'LotNumber', label:'หมายเลขล็อต', type:'text'},
     {k:'Date',label:'วันที่เก็บเกี่ยว',type:'date'},
     {k:'BeanType',label:'ชนิดเมล็ดกาแฟ',type:'select',opts:['Arabica','Robusta','Blend']},
-    {k:'WeightKg',label:'น้ำหนัก (กก.)',type:'number'},
+    {k:'WeightKg',label:'น้ำหนัก (กก.)',type:'number'}
   ], cols:['หมายเลขล็อต','วันที่','ชนิด','น้ำหนัก(กก.)']},
 
   'raw-material-track': {title:'ติดตามวัตถุดิบเข้า', fields:[
     {k:'InboundDate',label:'วันที่รับเข้า',type:'date'},
     {k:'Supplier',label:'ผู้ส่งมอบ',type:'text'},
-    {k:'QuantityKg',label:'ปริมาณ(กก.)',type:'number'},
+    {k:'QuantityKg',label:'ปริมาณ(กก.)',type:'number'}
   ], cols:['วันที่รับเข้า','ผู้ส่งมอบ','ปริมาณ(กก.)']},
 
   'bean-quality-check': {title:'ตรวจสอบคุณภาพเมล็ด', fields:[
     {k:'Date',label:'วันที่ตรวจ',type:'date'},
     {k:'Moisture',label:'ความชื้น(%)',type:'number'},
     {k:'Defects',label:'สิ่งเจือปน(%)',type:'number'},
-    {k:'Grade',label:'เกรด',type:'select',opts:['A','B','C']},
+    {k:'Grade',label:'เกรด',type:'select',opts:['A','B','C']}
   ], cols:['วันที่','ความชื้น(%)','สิ่งเจือปน(%)','เกรด']},
 
   'cleaning-record': {title:'บันทึกการทำความสะอาด', fields:[
     {k:'Date',label:'วันที่',type:'date'},
     {k:'Start',label:'เวลาเริ่ม',type:'time'},
     {k:'End',label:'เวลาสิ้นสุด',type:'time'},
-    {k:'Method',label:'วิธีทำความสะอาด',type:'text'},
+    {k:'Method',label:'วิธีทำความสะอาด',type:'text'}
   ], cols:['วันที่','เวลาเริ่ม','เวลาสิ้นสุด','วิธี']},
 
   'sorting-record': {title:'บันทึกการคัดแยกเมล็ด', fields:[
     {k:'Date',label:'วันที่',type:'date'},
     {k:'Batch',label:'เลขชุด',type:'text'},
     {k:'Method',label:'วิธีคัดแยก',type:'text'},
-    {k:'OutputKg',label:'ผลผลิต(กก.)',type:'number'},
+    {k:'OutputKg',label:'ผลผลิต(กก.)',type:'number'}
   ], cols:['วันที่','เลขชุด','วิธีคัดแยก','ผลผลิต(กก.)']},
 
   'resting-record': {title:'บันทึกการพักเมล็ด', fields:[
-    {k:'RestStart',label:'เริ่มพัก',type:'date'},
-    {k:'RestEnd',label:'สิ้นสุดพัก',type:'date'},
-    {k:'Temp',label:'อุณหภูมิ(°C)',type:'number'},
+    {k:'RestStart',label:'เริ่มพัก',type:'datetime-local'},
+    {k:'RestEnd',label:'สิ้นสุดพัก',type:'datetime-local'},
+    {k:'Temp',label:'อุณหภูมิ(°C)',type:'number'}
   ], cols:['เริ่มพัก','สิ้นสุดพัก','อุณหภูมิ']},
 
   'hulling-roasting': {title:'การปอกคั่ว', fields:[
-    {k:'Date',label:'วันที่',type:'date'},
+    {k:'Date',label:'วันที่คั่ว',type:'date'},
     {k:'RoastLevel',label:'ระดับการคั่ว',type:'select',opts:['Light','Medium','Dark']},
     {k:'TimeMin',label:'เวลาคั่ว(นาที)',type:'number'},
-    {k:'Loss',label:'Loss (%)',type:'number'},
-  ], cols:['วันที่','ระดับคั่ว','เวลาคั่ว(นาที)','Loss (%)']},
+    {k:'Loss',label:'Loss (%)',type:'number'}
+  ], cols:['วันที่คั่ว','ระดับคั่ว','เวลาคั่ว(นาที)','Loss (%)']},
 
   'quality-inspection': {title:'ตรวจสอบคุณภาพ', fields:[
-    {k:'Date',label:'วันที่',type:'date'},
+    {k:'Date',label:'วันที่ตรวจ',type:'date'},
     {k:'Param',label:'พารามิเตอร์',type:'text'},
     {k:'Value',label:'ค่า',type:'text'},
-    {k:'Result',label:'ผล',type:'select',opts:['ผ่าน','ไม่ผ่าน','ตรวจสอบใหม่']},
-  ], cols:['วันที่','พารามิเตอร์','ค่า','ผล']},
+    {k:'Result',label:'ผล',type:'select',opts:['ผ่าน','ไม่ผ่าน','ตรวจสอบใหม่']}
+  ], cols:['วันที่ตรวจ','พารามิเตอร์','ค่า','ผล']},
 
   'material-tracking': {title:'ติดตามวัสดุผลิต', fields:[
     {k:'Date',label:'วันที่',type:'date'},
     {k:'Item',label:'รายการ',type:'text'},
-    {k:'Qty',label:'จำนวน',type:'number'},
+    {k:'Qty',label:'จำนวน',type:'number'}
   ], cols:['วันที่','รายการ','จำนวน']},
 
   'bean-quality': {title:'ตรวจสอบคุณภาพเมล็ด', fields:[
     {k:'Date',label:'วันที่',type:'date'},
     {k:'Sample',label:'ตัวอย่าง',type:'text'},
     {k:'Score',label:'คะแนน',type:'number'},
-    {k:'Note',label:'หมายเหตุ',type:'textarea'},
+    {k:'Note',label:'หมายเหตุ',type:'textarea'}
   ], cols:['วันที่','ตัวอย่าง','คะแนน','หมายเหตุ']},
 
   'warehouse-harvest': {title:'บันทึกเก็บเกี่ยว (คลัง)', fields:[
     {k:'Date',label:'วันที่',type:'date'},
     {k:'Ref',label:'อ้างอิงเก็บเกี่ยว',type:'text'},
     {k:'Loc',label:'ที่เก็บ',type:'text'},
-    {k:'QtyKg',label:'ปริมาณ(กก.)',type:'number'},
+    {k:'QtyKg',label:'ปริมาณ(กก.)',type:'number'}
   ], cols:['วันที่','อ้างอิง','ที่เก็บ','ปริมาณ(กก.)']},
 
   'warehouse-tracking': {title:'ติดตามสินค้า (คลัง)', fields:[
     {k:'Date',label:'วันที่',type:'date'},
     {k:'Rack',label:'ชั้นวาง',type:'text'},
-    {k:'Qty',label:'จำนวน',type:'number'},
+    {k:'Qty',label:'จำนวน',type:'number'}
   ], cols:['วันที่','ชั้นวาง','จำนวน']},
 
   'warehouse-quality': {title:'ตรวจสอบคุณภาพ (คลัง)', fields:[
     {k:'Date',label:'วันที่',type:'date'},
     {k:'Lot',label:'ล็อต',type:'text'},
     {k:'QC',label:'ผล QC',type:'select',opts:['ผ่าน','ไม่ผ่าน','รอตรวจสอบ']},
-    {k:'Expire',label:'วันหมดอายุ',type:'date'},
+    {k:'Expire',label:'วันหมดอายุ',type:'date'}
   ], cols:['วันที่','ล็อต','ผล QC','วันหมดอายุ']},
 
   'order-record': {title:'บันทึกคำสั่งซื้อ', fields:[
-    {k:'Date',label:'วันที่สั่ง',type:'date'},
+    {k:'Date',label:'วันที่สั่งซื้อ',type:'date'},
     {k:'OrderNo',label:'เลขที่สั่งซื้อ',type:'text'},
     {k:'Customer',label:'ชื่อลูกค้า',type:'text'},
-    {k:'Amount',label:'ยอดรวม',type:'number'},
-  ], cols:['วันที่สั่ง','เลขที่สั่งซื้อ','ลูกค้า','ยอดรวม']},
+    {k:'Amount',label:'ยอดรวม',type:'number'}
+  ], cols:['วันที่สั่งซื้อ','เลขที่สั่งซื้อ','ลูกค้า','ยอดรวม']},
 
   'order-status': {title:'ติดตามสถานะคำสั่งซื้อ', fields:[
-    {k:'Date',label:'วันที่อัปเดต',type:'date'},
+    {k:'Date',label:'วันที่',type:'date'},
     {k:'OrderNo',label:'เลขที่สั่งซื้อ',type:'text'},
     {k:'Status',label:'สถานะ',type:'select',opts:['รับแล้ว','กำลังเตรียม','พร้อมส่ง','ส่งแล้ว']},
-    {k:'ETA',label:'กำหนดส่ง',type:'date'},
-  ], cols:['วันที่อัปเดต','เลขที่','สถานะ','กำหนดส่ง']},
+    {k:'ETA',label:'กำหนดส่ง',type:'date'}
+  ], cols:['วันที่','เลขที่','สถานะ','กำหนดส่ง']},
 
   'documents': {title:'จัดทำเอกสาร', fields:[
     {k:'IssueDate',label:'วันที่ออก',type:'date'},
     {k:'DocType',label:'ประเภทเอกสาร',type:'select',opts:['ใบกำกับภาษี','ใบส่งของ','ใบรับของ']},
-    {k:'Ref',label:'อ้างอิง',type:'text'},
+    {k:'Ref',label:'อ้างอิง',type:'text'}
   ], cols:['วันที่ออก','ประเภท','อ้างอิง']},
 
   'transport-pickup': {title:'จัดการรับสินค้า', fields:[
     {k:'Date',label:'วันที่รับ',type:'date'},
     {k:'PickupID',label:'เลขรับของ',type:'text'},
     {k:'Driver',label:'คนขับ',type:'text'},
-    {k:'Vehicle',label:'ทะเบียนรถ',type:'text'},
+    {k:'Vehicle',label:'ทะเบียนรถ',type:'text'}
   ], cols:['วันที่รับ','เลขรับของ','คนขับ','ทะเบียน']},
 
   'route-schedule': {title:'กำหนดเส้นทางจัดส่ง', fields:[
     {k:'ShipDate',label:'วันที่ส่ง',type:'date'},
     {k:'Route',label:'เส้นทาง',type:'text'},
-    {k:'Stop',label:'จุดแวะ',type:'text'},
+    {k:'Stop',label:'จุดแวะ',type:'text'}
   ], cols:['วันที่ส่ง','เส้นทาง','จุดแวะ']},
 
   'delivery-confirm': {title:'ยืนยันการจัดส่ง', fields:[
-    {k:'Time',label:'เวลาส่งถึง (วันที่)',type:'date'},
+    {k:'Date',label:'วันที่',type:'date'},
     {k:'Ref',label:'เลขเอกสาร',type:'text'},
-    {k:'Receiver',label:'ผู้รับ',type:'text'},
-  ], cols:['เวลาส่งถึง','เลขเอกสาร','ผู้รับ']},
+    {k:'Time',label:'เวลาส่งถึง',type:'time'},
+    {k:'Receiver',label:'ผู้รับ',type:'text'}
+  ], cols:['วันที่','เลขเอกสาร','เวลาส่งถึง','ผู้รับ']},
 
   /* รายงาน */
-  'harvest-report': {title:'รายงานการเก็บเกี่ยว', report:true, cols:['วันที่','ชนิด','น้ำหนัก(กก.)']},
-  'material-report': {title:'รายงานวัตถุดิบ', report:true, cols:['วันที่รับเข้า','ผู้ส่งมอบ','ปริมาณ(กก.)']},
-  'quality-report': {title:'รายงานคุณภาพ', report:true, cols:['วันที่','ความชื้น(%)','สิ่งเจือปน(%)','เกรด']},
-  'trend-analysis': {title:'วิเคราะห์แนวโน้ม', report:true, cols:['วันที่','ตัวชี้วัด','ค่า']},
+  'harvest-report': {title:'รายงานการเก็บเกี่ยว', report:true},
+  'material-report': {title:'รายงานวัตถุดิบ', report:true},
+  'quality-report' : {title:'รายงานคุณภาพ', report:true},
+  'trend-analysis' : {title:'วิเคราะห์แนวโน้ม', report:true},
 };
 
-/* ===================== AUTH ===================== */
-function isAuthed(){return !!localStorage.getItem(KEY_USER)}
+/* =================== AUTH & ROUTER =================== */
+function isAuthed(){return !!localStorage.getItem(STORAGE_USER)}
 function doLogin(e){
   e.preventDefault();
   const u=document.getElementById('u').value.trim();
   const p=document.getElementById('p').value;
-  if(!u||p.length<4){toast('แจ้งเตือน','กรอกข้อมูลให้ครบ','error');return false}
-  const role=(u.toLowerCase()==='admin')?'ผู้ดูแลระบบ':'พนักงาน';
-  localStorage.setItem(KEY_USER, JSON.stringify({name:u,role}));
-  route('#/dashboard'); return false;
+  if(!u||p.length<4){alert('กรอกข้อมูลให้ครบ');return false}
+  const role = (u.toLowerCase()==='admin')?'ผู้ดูแลระบบ':'พนักงาน';
+  localStorage.setItem(STORAGE_USER, JSON.stringify({name:u,role}));
+  route('#/dashboard');
+  return false;
 }
 function fillDemo(){document.getElementById('u').value='admin';document.getElementById('p').value='1234'}
-function logout(){localStorage.removeItem(KEY_USER);route('#/login')}
+function logout(){ localStorage.removeItem(STORAGE_USER); route('#/login'); }
 
-/* ===================== ROUTER ===================== */
-window.addEventListener('hashchange',()=>route(location.hash));
+window.addEventListener('hashchange', ()=>route(location.hash));
 function route(hash){
-  const h=hash || (isAuthed()?'#/dashboard':'#/login');
-  const [,path,arg]=h.split('/');
-  showView(path,arg);
+  const h = hash || (isAuthed() ? '#/dashboard' : '#/login');
+  const [ , path, arg ] = h.split('/');
+  showView(path, arg);
 }
 function showView(view,arg){
-  document.getElementById('app-header').style.display=(view==='login')?'none':'flex';
+  document.getElementById('app-header').style.display = (view==='login')?'none':'flex';
   hideAll(['view-login','view-dashboard','view-page']);
   if(view==='login'){document.getElementById('view-login').style.display='flex';return}
   if(!isAuthed()){location.hash='#/login';return}
-  const u=JSON.parse(localStorage.getItem(KEY_USER)||'{}');
-  document.getElementById('who').textContent=u.name||'ผู้ใช้';
+  const u=JSON.parse(localStorage.getItem(STORAGE_USER)||'{}');
+  document.getElementById('who').textContent = `${u.name}`;
 
   if(view==='dashboard'){document.getElementById('view-dashboard').style.display='block';return}
-  if(view==='page'){currentCode=arg; renderPage(arg); document.getElementById('view-page').style.display='block';return}
+  if(view==='page'){ currentCode = arg; renderPage(arg); document.getElementById('view-page').style.display='block'; return}
   document.getElementById('view-dashboard').style.display='block';
 }
 function hideAll(ids){ids.forEach(id=>document.getElementById(id).style.display='none')}
-function go(code){location.hash=`#/page/${code}`}
+function go(code){ location.hash = `#/page/${code}`; }
 
-/* ===================== QUICK RANGE ===================== */
+/* =================== TOAST =================== */
+function showToast(title, message, type='success'){
+  const el=document.createElement('div');
+  el.className='toast '+(type==='error'?'error':'');
+  const icon = type==='error'?'❌':'✅';
+  el.innerHTML=`
+    <div class="toast-header">
+      <div class="toast-title">${icon} ${title}</div>
+      <button class="toast-close" onclick="this.closest('.toast').remove()">×</button>
+    </div>
+    <div class="toast-body">${message}</div>`;
+  document.getElementById('toastContainer').appendChild(el);
+  setTimeout(()=>{ el.style.animation='slideOut .25s ease-out'; setTimeout(()=>el.remove(),240); }, 4200);
+}
+
+/* =================== QUICK RANGE HELPERS =================== */
 function getRangeBounds(kind){
-  const today=new Date();
-  const iso=(d)=>{d.setHours(0,0,0,0);return d.toISOString().slice(0,10)};
-  if(kind==='all') return {from:'',to:''};
-  if(kind==='last_30'){const to=new Date();const from=new Date();from.setDate(from.getDate()-30);return {from:iso(from),to:iso(to)}}
-  if(kind==='last_90'){const to=new Date();const from=new Date();from.setDate(from.getDate()-90);return {from:iso(from),to:iso(to)}}
-  if(kind==='last_365'){const to=new Date();const from=new Date();from.setDate(from.getDate()-365);return {from:iso(from),to:iso(to)}}
-  if(kind==='this_month'){const d=new Date();const y=d.getFullYear();const m=d.getMonth();return {from:iso(new Date(y,m,1)),to:iso(new Date(y,m+1,0))}}
-  if(kind==='this_quarter'){const d=new Date();const y=d.getFullYear();const m=d.getMonth();const qs=m-(m%3);return {from:iso(new Date(y,qs,1)),to:iso(new Date(y,qs+3,0))}}
-  if(kind==='this_year'){const y=new Date().getFullYear();return {from:iso(new Date(y,0,1)),to:iso(new Date(y,11,31))}}
+  const today = new Date(); today.setHours(0,0,0,0);
+  const iso = (d)=> d.toISOString().slice(0,10);
+  if(kind==='all') return {from:'', to:''};
+  if(kind==='last_30'){const f=new Date(today); f.setDate(f.getDate()-30); return {from:iso(f),to:iso(today)}}
+  if(kind==='last_90'){const f=new Date(today); f.setDate(f.getDate()-90); return {from:iso(f),to:iso(today)}}
+  if(kind==='last_365'){const f=new Date(today); f.setDate(f.getDate()-365); return {from:iso(f),to:iso(today)}}
+  if(kind==='this_month'){const d=new Date(); const y=d.getFullYear(), m=d.getMonth(); const f=new Date(y,m,1); const t=new Date(y,m+1,0); return {from:iso(f),to:iso(t)}}
+  if(kind==='this_quarter'){const d=new Date(); const y=d.getFullYear(), m=d.getMonth(); const qs=m-(m%3); const f=new Date(y,qs,1); const t=new Date(y,qs+3,0); return {from:iso(f),to:iso(t)}}
+  if(kind==='this_year'){const y=today.getFullYear(); return {from:`${y}-01-01`, to:`${y}-12-31`}}
   return {from:'',to:''};
 }
-const DATE_KEYS=['Date','InboundDate','IssueDate','ShipDate','ETA','RestStart','RestEnd','Expire','Time'];
+const DATE_KEYS = ['Date','InboundDate','IssueDate','ShipDate','ETA','RestStart','RestEnd','Expire'];
 function findDateKeyForRoute(code){
-  const cfg=routes[code]; if(!cfg||!cfg.fields) return null;
-  for(const k of DATE_KEYS){ if(cfg.fields.some(f=>f.k===k)) return k; }
+  const cfg = routes[code];
+  if(!cfg||!cfg.fields) return null;
+  for(const dk of DATE_KEYS){ if(cfg.fields.some(f=>f.k===dk)) return dk; }
   return null;
 }
+function toISOfromDDMMYYYY(s){
+  const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if(!m) return null;
+  const [_, d, mo, y] = m;
+  const dd=('0'+d).slice(-2), mm=('0'+mo).slice(-2);
+  return `${y}-${mm}-${dd}`;
+}
 function handleQuickRangeChange(){
-  const sel=document.getElementById('quickRange'); if(!sel) return;
-  applyRangeToCurrentView(sel.value);
+  if(!currentCode) return;
+  const cfg = routes[currentCode]||{};
+  const {value} = document.getElementById(cfg.report ? 'quickRangeReport' : 'quickRange');
+  applyRangeToCurrentView(value);
 }
 function applyRangeToCurrentView(rangeKey){
-  const {from,to}=getRangeBounds(rangeKey||'all');
-  const cfg=routes[currentCode]||{};
+  const cfg = routes[currentCode]||{};
+  const {from,to} = getRangeBounds(rangeKey);
   if(cfg.report){
-    const f1=document.getElementById('f_from'); const f2=document.getElementById('f_to');
-    if(f1&&from) f1.value=from; if(f2&&to) f2.value=to;
+    const fFrom=document.getElementById('f_from');
+    const fTo  =document.getElementById('f_to');
+    if(fFrom && from) fFrom.value=from;
+    if(fTo   && to  ) fTo.value=to;
     const btn=document.getElementById('r-analyze'); if(btn) btn.click();
   }else{
-    const dk=findDateKeyForRoute(currentCode);
-    renderGenericTableFilteredByRange(dk,from,to);
+    const dateKey = findDateKeyForRoute(currentCode);
+    renderGenericTableFilteredByRange(dateKey, from, to);
   }
 }
 
-/* ===================== PAGE RENDER ===================== */
-function renderPage(code){
-  const cfg=routes[code]; const title=cfg?cfg.title:'เมนู';
-  document.getElementById('page-title').textContent=title;
-  document.getElementById('crumb').textContent=title;
+/* =================== STORAGE =================== */
+function loadSavedRecords(){
+  try{ savedRecords = JSON.parse(localStorage.getItem(STORAGE_RECORDS)||'{}'); }
+  catch{ savedRecords = {}; }
+}
+function saveRecordsToStorage(){
+  localStorage.setItem(STORAGE_RECORDS, JSON.stringify(savedRecords));
+}
 
-  const generic=document.getElementById('generic-grid');
-  const reportC=document.getElementById('report-container');
-
-  const qSel=document.getElementById('quickRange');
-  if(qSel && !qSel.dataset.inited){
-    qSel.value='this_month';
-    qSel.addEventListener('change',handleQuickRangeChange);
-    qSel.dataset.inited='1';
+/* =================== SEEDER (เติมข้อมูลทุกหน้า) =================== */
+function seedAllIfEmpty(){
+  const need = Object.keys(routes).filter(k=>!routes[k].report);
+  let changed=false;
+  need.forEach(code=>{
+    if(!savedRecords[code] || savedRecords[code].length===0){
+      savedRecords[code] = seedForRoute(code);
+      changed=true;
+    }
+  });
+  if(changed) saveRecordsToStorage();
+}
+function rand(arr){ return arr[Math.floor(Math.random()*arr.length)] }
+function randInt(a,b){ return a + Math.floor(Math.random()*(b-a+1)); }
+function daysAgoISO(n){ const d=new Date(); d.setDate(d.getDate()-n); d.setHours(0,0,0,0); return d.toISOString().slice(0,10); }
+function seedForRoute(code){
+  const out=[];
+  // สร้างย้อนหลัง ~ 18 เดือน แบบสุ่มวันละ 0-3 รายการ
+  const spanDays = 540;
+  for(let i=spanDays;i>=0;i--){
+    const iso = daysAgoISO(i);
+    const n = Math.random()<0.35 ? 0 : Math.random()<0.55 ? 1 : Math.random()<0.85 ? 2 : 3; // บางวันไม่มี บางวันมีหลายแถว
+    for(let k=0;k<n;k++){
+      out.push(makeRecord(code, iso));
+    }
   }
+  // ใหม่สุดไว้บน
+  out.sort((a,b)=> (b.Date||b.InboundDate||b.IssueDate||b.ShipDate||b.RestStart||'').localeCompare(a.Date||a.InboundDate||a.IssueDate||a.ShipDate||a.RestStart||''));
+  return out;
+}
+function makeRecord(code, iso){
+  switch(code){
+    case 'harvest-record':
+      return {LotNumber:`LOT-${iso.replace(/-/g,'')}-${randInt(100,999)}`, Date:iso, BeanType:rand(['Arabica','Robusta','Blend']), WeightKg:randInt(120,520)};
+    case 'raw-material-track':
+      return {InboundDate:iso, Supplier:rand(['เกษตรกร A','เกษตรกร B','สหกรณ์ C','บริษัท D']), QuantityKg:randInt(80,600)};
+    case 'bean-quality-check':
+      return {Date:iso, Moisture:randInt(8,13), Defects:randInt(0,5), Grade:rand(['A','B','C'])};
+    case 'cleaning-record':
+      return {Date:iso, Start:`0${randInt(7,9)}:00`, End:`${randInt(10,12)}:00`, Method:rand(['น้ำยาฆ่าเชื้อ','ไอน้ำ','โอโซน'])};
+    case 'sorting-record':
+      return {Date:iso, Batch:`B-${randInt(1000,9999)}`, Method:rand(['ตะแกรง','ลมดูด','สายพาน']), OutputKg:randInt(50,450)};
+    case 'resting-record':
+      return {RestStart:`${iso}T0${randInt(7,9)}:00`, RestEnd:`${iso}T${randInt(12,18)}:00`, Temp:randInt(18,26)};
+    case 'hulling-roasting':
+      return {Date:iso, RoastLevel:rand(['Light','Medium','Dark']), TimeMin:randInt(9,18), Loss:randInt(10,20)};
+    case 'quality-inspection':
+      return {Date:iso, Param:rand(['pH','Color','Density']), Value:rand(['6.2','เข้ม','0.68']), Result:rand(['ผ่าน','ไม่ผ่าน','ตรวจสอบใหม่'])};
+    case 'material-tracking':
+      return {Date:iso, Item:rand(['ถุงซิป','กล่อง','สติกเกอร์','พาเลท']), Qty:randInt(10,200)};
+    case 'bean-quality':
+      return {Date:iso, Sample:`S-${randInt(100,999)}`, Score:randInt(70,92), Note:rand(['-','กลิ่นดี','ต้องคัดเพิ่ม'])};
+    case 'warehouse-harvest':
+      return {Date:iso, Ref:`LOT-${randInt(1000,9999)}`, Loc:rand(['คลัง A','คลัง B','ห้องเย็น']), QtyKg:randInt(50,500)};
+    case 'warehouse-tracking':
+      return {Date:iso, Rack:`R-${randInt(1,20)}`, Qty:randInt(5,120)};
+    case 'warehouse-quality':
+      return {Date:iso, Lot:`L-${randInt(1000,9999)}`, QC:rand(['ผ่าน','ไม่ผ่าน','รอตรวจสอบ']), Expire:daysAgoISO(-randInt(30,240))};
+    case 'order-record':
+      return {Date:iso, OrderNo:`ORD-${iso.slice(2).replace(/-/g,'')}-${randInt(100,999)}`, Customer:rand(['สมชาย','วิไล','บริษัท กาแฟดี','CoffeeHub','Bean&Co']), Amount:randInt(1200,35000)};
+    case 'order-status':
+      return {Date:iso, OrderNo:`ORD-${iso.slice(2).replace(/-/g,'')}-${randInt(100,999)}`, Status:rand(['รับแล้ว','กำลังเตรียม','พร้อมส่ง','ส่งแล้ว']), ETA:daysAgoISO(-randInt(1,14))};
+    case 'documents':
+      return {IssueDate:iso, DocType:rand(['ใบกำกับภาษี','ใบส่งของ','ใบรับของ']), Ref:`REF-${randInt(10000,99999)}`};
+    case 'transport-pickup':
+      return {Date:iso, PickupID:`PU-${randInt(1000,9999)}`, Driver:rand(['สมปอง','ชัยวัฒน์','มณี','อดิเทพ']), Vehicle:`${rand(['1กข','6ขค','3ศษ'])}-${randInt(1000,9999)}`};
+    case 'route-schedule':
+      return {ShipDate:iso, Route:rand(['เส้นทาง เหนือ','เส้นทาง ตะวันออก','เส้นทาง ใต้','เส้นทาง กลาง']), Stop:rand(['ร้าน A, B','คลัง C','ลูกค้า D'])};
+    case 'delivery-confirm':
+      return {Date:iso, Ref:`DLV-${randInt(10000,99999)}`, Time:`${randInt(9,18)}:${randInt(0,59).toString().padStart(2,'0')}`, Receiver:rand(['คุณเอก','คุณบี','คุณซี'])};
+    default: return {Date:iso};
+  }
+}
+
+/* =================== PAGE RENDER =================== */
+function renderPage(code){
+  const cfg = routes[code];
+  const title = cfg? cfg.title : 'เมนู';
+  document.getElementById('page-title').textContent = title;
+  document.getElementById('crumb').textContent = title;
+
+  const generic = document.getElementById('generic-grid');
+  const reportC = document.getElementById('report-container');
+  const qForm = document.getElementById('quickRange');
+  const qRep  = document.getElementById('quickRangeReport');
 
   if(cfg?.report){
-    generic.style.display='none'; reportC.style.display='block';
-    renderReport(code); if(qSel) applyRangeToCurrentView(qSel.value);
+    generic.style.display='none';
+    reportC.style.display='block';
+    renderReportPage(code, title);
+    // init quick range for report
+    if(qRep && !qRep.dataset.inited){ qRep.addEventListener('change', handleQuickRangeChange); qRep.dataset.inited='1'; }
+    document.getElementById('quickRangeReport').value='this_month';
+    applyRangeToCurrentView('this_month');
     return;
-  }else{
-    reportC.style.display='none'; generic.style.display='grid';
+  } else {
+    reportC.style.display='none';
+    generic.style.display='grid';
   }
 
   // build form
-  const fa=document.getElementById('form-area'); fa.innerHTML='';
+  const fa = document.getElementById('form-area'); fa.innerHTML='';
   (cfg?.fields||[]).forEach(f=>{
-    const box=document.createElement('div');
-    let html=`<label>${f.label}</label>`;
-    if(f.type==='textarea'){ html+=`<textarea id="f_${f.k}" placeholder="${f.label}"></textarea>`; }
-    else if(f.type==='select'){ html+=`<select id="f_${f.k}"><option value="">เลือก...</option>${(f.opts||[]).map(o=>`<option>${o}</option>`).join('')}</select>`; }
-    else{ html+=`<input id="f_${f.k}" type="${f.type||'text'}" placeholder="${f.label}">`; }
-    box.innerHTML=html; fa.appendChild(box);
+    const box=document.createElement('div'); let html = `<label>${f.label}</label>`;
+    if(f.type==='textarea'){
+      html += `<textarea id="f_${f.k}" placeholder="${f.label}"></textarea>`;
+    } else if(f.type==='select'){
+      html += `<select id="f_${f.k}"><option value="">เลือก...</option>${(f.opts||[]).map(o=>`<option>${o}</option>`).join('')}</select>`;
+    } else {
+      html += `<input id="f_${f.k}" type="${f.type||'text'}" placeholder="${f.label}">`;
+    }
+    box.innerHTML = html; fa.appendChild(box);
   });
 
-  // table head
+  // build table header
   const th=document.getElementById('th'); th.innerHTML='';
-  (cfg?.cols||[]).forEach(c=>{const el=document.createElement('th');el.textContent=c;th.appendChild(el);});
+  (cfg?.cols||[]).forEach(c=>{ const el=document.createElement('th'); el.textContent=c; th.appendChild(el); });
 
-  // render rows by range
-  const dk=findDateKeyForRoute(code);
-  if(qSel) applyRangeToCurrentView(qSel.value); else renderGenericTableFilteredByRange(dk);
+  // init quick range for generic
+  if(qForm && !qForm.dataset.inited){ qForm.addEventListener('change', handleQuickRangeChange); qForm.dataset.inited='1'; }
+  document.getElementById('quickRange').value='this_month';
+
+  // render rows (filtered)
+  const dateKey = findDateKeyForRoute(code);
+  applyRangeToCurrentView('this_month');
 }
 
-/* ===== Generic table render with filter ===== */
-function renderGenericTableFilteredByRange(dateKey,forceFrom,forceTo){
-  const cfg=routes[currentCode]; if(!cfg) return;
+/* ====== GENERIC TABLE FILTER & ROW BUILDER ====== */
+function renderGenericTableFilteredByRange(dateKey, forceFrom, forceTo){
+  const cfg = routes[currentCode]; if(!cfg) return;
   const tb=document.getElementById('tb'); tb.innerHTML='';
-  let rows=(savedRecords[currentCode]||[]).slice();
+  let rows = (savedRecords[currentCode]||[]).slice();
 
-  const sel=document.getElementById('quickRange'); const chosen=sel?sel.value:'all';
-  const {from,to}=(forceFrom||forceTo)?{from:forceFrom||'',to:forceTo||''}:getRangeBounds(chosen);
+  const sel = document.getElementById('quickRange');
+  const key = sel ? sel.value : 'all';
+  const {from,to} = (forceFrom||forceTo)?{from:forceFrom||'',to:forceTo||''}:getRangeBounds(key);
 
   if(dateKey && (from||to)){
-    rows=rows.filter(r=>{
-      const v=(r[dateKey]||'').toString();
-      if(!v) return false;
-      const iso = v.includes('/') ? toISO(v) : v;
+    rows = rows.filter(r=>{
+      const raw = r[dateKey]||'';
+      const iso = raw.includes('/') ? toISOfromDDMMYYYY(raw) : raw;
+      if(!iso) return false;
       if(from && iso<from) return false;
-      if(to && iso>to) return false;
+      if(to   && iso>to  ) return false;
       return true;
     });
   }
-  rows.slice(0,200).forEach(rec=> appendRow(document.getElementById('tb'), cfg.cols, rec));
+
+  rows.slice(0,200).forEach(rec=> tb.appendChild(buildRow(cfg.cols, rec)));
 }
-
-/* ===================== REPORT RENDER ===================== */
-function renderReport(code){
-  const cfg=routes[code];
-  // header for report table
-  const rth=document.getElementById('rth'); rth.innerHTML='';
-  (cfg.cols||[]).forEach(c=>{const th=document.createElement('th');th.textContent=c;rth.appendChild(th);});
-
-  document.getElementById('rtb').innerHTML='';
-  // set default dates (last 30 days)
-  const {from,to}=getRangeBounds('last_30');
-  const f1=document.getElementById('f_from'); const f2=document.getElementById('f_to');
-  if(f1) f1.value=from; if(f2) f2.value=to;
-
-  document.getElementById('r-analyze').onclick=()=>{
-    const from=f1.value||''; const to=f2.value||'';
-    const metric=document.getElementById('f_metric').value||'';
-    const list=(savedRecords[codeToDataSource(code)]||[]).slice(); // map report -> source
-    const filtered=list.filter(rec=>{
-      let ok=true;
-      // date pick: try Date/InboundDate/IssueDate/ShipDate etc.
-      const d = rec.Date || rec.InboundDate || rec.IssueDate || rec.ShipDate || rec.ETA || rec.RestStart || rec.Time || '';
-      const iso = d ? (d.includes('/')?toISO(d):d) : '';
-      if(from && iso && iso<from) ok=false;
-      if(to && iso && iso>to) ok=false;
-      if(metric){
-        // simple contains for BeanType / metrics
-        const txt = JSON.stringify(rec);
-        if(!txt.includes(metric)) ok=false;
-      }
-      return ok;
-    });
-
-    // paint table
-    const rtb=document.getElementById('rtb'); rtb.innerHTML='';
-    filtered.forEach(rec=>{
-      appendRow(rtb, cfg.cols, rec);
-    });
-
-    // summary
-    document.getElementById('r-summary').innerHTML=buildSummaryHTML(filtered, code);
-    toast('วิเคราะห์สำเร็จ',`ดึงข้อมูล ${filtered.length.toLocaleString('th-TH')} รายการ`);
-  };
-
-  // run once
-  document.getElementById('r-analyze').click();
-}
-
-// บางรายงานใช้ datasource จากหน้าอินพุตหลัก
-function codeToDataSource(code){
-  if(code==='harvest-report') return 'harvest-record';
-  if(code==='material-report') return 'raw-material-track';
-  if(code==='quality-report') return 'bean-quality-check';
-  if(code==='trend-analysis') return 'quality-inspection';
-  return code;
-}
-
-function buildSummaryHTML(rows, code){
-  if(rows.length===0) return 'ไม่มีข้อมูลในช่วงที่เลือก';
-  let html='';
-  if(code==='harvest-report'){
-    const sum = rows.reduce((a,b)=>a + (num(b.WeightKg||b.QtyKg||0)),0);
-    html = `จำนวนแถว: <b>${rows.length.toLocaleString('th-TH')}</b> | น้ำหนักรวม: <b>${sum.toLocaleString('th-TH')} กก.</b>`;
-  }else if(code==='material-report'){
-    const sum = rows.reduce((a,b)=>a + (num(b.QuantityKg||0)),0);
-    const sup = new Set(rows.map(r=>r.Supplier).filter(Boolean)).size;
-    html = `จำนวนแถว: <b>${rows.length}</b> | ปริมาณรวม: <b>${sum.toLocaleString('th-TH')} กก.</b> | ผู้ส่งมอบ: <b>${sup}</b> ราย`;
-  }else if(code==='quality-report'){
-    const moist = avg(rows.map(r=>num(r.Moisture)));
-    const def   = avg(rows.map(r=>num(r.Defects)));
-    const gradeA = rows.filter(r=>r.Grade==='A').length;
-    html = `แถว: <b>${rows.length}</b> | ความชื้นเฉลี่ย: <b>${moist.toFixed(2)}%</b> | สิ่งเจือปนเฉลี่ย: <b>${def.toFixed(2)}%</b> | จำนวนเกรด A: <b>${gradeA}</b>`;
-  }else{
-    html = `จำนวนแถว: <b>${rows.length}</b>`;
-  }
-  return html;
-}
-
-/* ===================== TABLE UTILS ===================== */
-function appendRow(tbody, cols, data){
+function buildRow(cols, data){
   const tr=document.createElement('tr');
   cols.forEach(col=>{
-    const td=document.createElement('td');
-    td.innerHTML = mapCol(col,data);
-    tr.appendChild(td);
+    const td=document.createElement('td'); td.innerHTML = mapValue(col, data); tr.appendChild(td);
   });
-  tbody.appendChild(tr);
+  return tr;
 }
-function mapCol(col,d){
-  const dash='-';
-  const fmt=(s)=>s??dash;
-  if(col.includes('หมายเลขล็อต')) return fmt(d.LotNumber);
-  if(col.includes('วันที่รับเข้า')) return fmt(toTH(d.InboundDate));
-  if(col.includes('วันที่ออก')) return fmt(toTH(d.IssueDate));
-  if(col.includes('วันที่ส่ง')) return fmt(toTH(d.ShipDate));
-  if(col.includes('กำหนดส่ง')) return fmt(toTH(d.ETA));
-  if(col.includes('เวลาส่งถึง')) return fmt(toTH(d.Time));
-  if(col.includes('วันที่')) return fmt(toTH(d.Date||d.RestStart||d.RestEnd));
-  if(col.includes('ชนิด')) return fmt(d.BeanType);
-  if(col.includes('น้ำหนัก')) return d.WeightKg? `${num(d.WeightKg)}`:dash;
-  if(col.includes('ปริมาณ')&&col.includes('กก')) return d.QuantityKg? `${num(d.QuantityKg)}`: (d.QtyKg? `${num(d.QtyKg)}`:dash);
-  if(col.includes('ผู้ส่งมอบ')) return fmt(d.Supplier);
-  if(col.includes('ความชื้น')) return d.Moisture!=null? `${num(d.Moisture)}%`:dash;
-  if(col.includes('สิ่งเจือปน')) return d.Defects!=null? `${num(d.Defects)}%`:dash;
-  if(col.includes('เกรด')) return fmt(d.Grade);
-  if(col.includes('เวลาเริ่ม')) return fmt(d.Start);
-  if(col.includes('เวลาสิ้นสุด')) return fmt(d.End);
-  if(col.includes('วิธี')) return fmt(d.Method);
-  if(col.includes('เลขชุด')) return fmt(d.Batch);
-  if(col.includes('ผลผลิต')) return d.OutputKg!=null? `${num(d.OutputKg)}`:dash;
-  if(col.includes('อุณหภูมิ')) return d.Temp!=null? `${num(d.Temp)}°C`:dash;
-  if(col.includes('ระดับคั่ว')) return fmt(d.RoastLevel);
-  if(col.includes('เวลาคั่ว')) return d.TimeMin!=null? `${num(d.TimeMin)}`:dash;
-  if(col.includes('Loss')) return d.Loss!=null? `${num(d.Loss)}%`:dash;
-  if(col.includes('พารามิเตอร์')) return fmt(d.Param);
-  if(col==='ค่า' || col.includes('ค่า ')) return fmt(d.Value||d.Score);
-  if(col.includes('ผล')||col.includes('QC')){
-    const r = d.Result||d.QC||'รอตรวจสอบ';
-    const cl = (r==='ผ่าน')?'ok':'warn';
-    return `<span class="pill ${cl}">${r}</span>`;
+function mapValue(col, data){
+  const dd=(k)=> data[k]??'';
+  const toDDMM=(s)=> s && s.includes('-') ? s.split('-').reverse().join('/') : (s||'-');
+
+  if(col.includes('หมายเลขล็อต')) return dd('LotNumber')||'-';
+  if(col.includes('เลขที่สั่งซื้อ')||col==='เลขที่') return dd('OrderNo')||dd('Ref')||dd('PickupID')||dd('DLV')||'-';
+  if(col.includes('เลขเอกสาร')) return dd('Ref')||dd('OrderNo')||'-';
+  if(col.includes('เลขรับของ')) return dd('PickupID')||'-';
+  
+  // วันที่ต่างๆ
+  if(col.includes('วันที่เก็บเกี่ยว')||col==='วันที่'||col.includes('วันที่ตรวจ')||col.includes('วันที่คั่ว')) return toDDMM(dd('Date'));
+  if(col.includes('วันที่รับเข้า')) return toDDMM(dd('InboundDate'));
+  if(col.includes('วันที่ออก')) return toDDMM(dd('IssueDate'));
+  if(col.includes('วันที่ส่ง')) return toDDMM(dd('ShipDate'));
+  if(col.includes('วันที่สั่งซื้อ')) return toDDMM(dd('Date'));
+  if(col.includes('วันที่รับ')) return toDDMM(dd('Date'));
+  if(col.includes('กำหนดส่ง')) return toDDMM(dd('ETA'));
+  if(col.includes('วันหมดอายุ')) return toDDMM(dd('Expire'));
+  if(col.includes('เริ่มพัก')) return dd('RestStart')||'-';
+  if(col.includes('สิ้นสุดพัก')) return dd('RestEnd')||'-';
+  if(col.includes('เวลาส่งถึง')) return dd('Time')||'-';
+  if(col.includes('เวลาเริ่ม')) return dd('Start')||'-';
+  if(col.includes('เวลาสิ้นสุด')) return dd('End')||'-';
+
+  // ข้อมูลเฉพาะ
+  if(col.includes('ชนิด')) return dd('BeanType')||'-';
+  if(col.includes('น้ำหนัก')) return dd('WeightKg')? dd('WeightKg')+' กก.' : '-';
+  if(col.includes('ปริมาณ(กก.)')) return dd('QtyKg')||dd('QuantityKg')||'-';
+  if(col==='ปริมาณ(กก.)') return dd('QtyKg')||dd('QuantityKg')||'-';
+  if(col==='ผลผลิต(กก.)') return dd('OutputKg')||'-';
+  if(col==='อุณหภูมิ') return dd('Temp')? dd('Temp')+'°C':'-';
+
+  if(col.includes('ผู้ส่งมอบ')) return dd('Supplier')||'-';
+  if(col.includes('รายการ')) return dd('Item')||'-';
+  if(col==='จำนวน') return dd('Qty')||'-';
+  if(col.includes('ตัวอย่าง')) return dd('Sample')||'-';
+  if(col.includes('คะแนน')) return dd('Score')||'-';
+  if(col.includes('หมายเหตุ')) return dd('Note')||'-';
+
+  if(col.includes('ความชื้น')) return dd('Moisture')? dd('Moisture')+'%':'-';
+  if(col.includes('สิ่งเจือปน')) return dd('Defects')? dd('Defects')+'%':'-';
+  if(col.includes('เกรด')) return dd('Grade')||'-';
+
+  if(col.includes('พารามิเตอร์')) return dd('Param')||'-';
+  if(col==='ค่า') return dd('Value')||'-';
+  
+  // สถานะ
+  if(col.includes('ผล ') || col==='ผล' || col.includes('QC') || col==='ผล QC'){
+    const val = dd('Result')||dd('QC')||'รอตรวจสอบ';
+    const cls = (val==='ผ่าน'||val==='ส่งแล้ว'||val==='พร้อมส่ง')?'ok':'warn';
+    return `<span class="pill ${cls}">${val}</span>`;
   }
-  if(col.includes('รายการ')) return fmt(d.Item);
-  if(col.includes('จำนวน')) return d.Qty!=null? `${num(d.Qty)}`:dash;
-  if(col.includes('ตัวอย่าง')) return fmt(d.Sample);
-  if(col.includes('หมายเหตุ')) return fmt(d.Note);
-  if(col.includes('อ้างอิง')) return fmt(d.Ref);
-  if(col.includes('ที่เก็บ')) return fmt(d.Loc);
-  if(col.includes('ชั้นวาง')) return fmt(d.Rack);
-  if(col.includes('ล็อต')) return fmt(d.Lot);
-  if(col.includes('ลูกค้า')) return fmt(d.Customer);
-  if(col.includes('ยอดรวม')) return d.Amount!=null? `฿${num(d.Amount)}`:dash;
-  if(col.includes('เลขที่สั่งซื้อ')||col.includes('เลขที่')) return fmt(d.OrderNo||d.Ref||d.PickupID);
-  if(col.includes('เส้นทาง')) return fmt(d.Route);
-  if(col.includes('จุดแวะ')) return fmt(d.Stop);
-  if(col.includes('ผู้รับ')) return fmt(d.Receiver);
-  return dash;
-}
-function num(v){return Number(v)||0}
-function toISO(s){ // DD/MM/YYYY -> YYYY-MM-DD
-  const m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/); if(!m) return s;
-  const d=('0'+m[1]).slice(-2), mo=('0'+m[2]).slice(-2), y=m[3];
-  return `${y}-${mo}-${d}`;
-}
-function toTH(s){ if(!s) return '-'; if(s.includes('/')) return s;
-  // YYYY-MM-DD -> DD/MM/YYYY
-  const [y,m,d]=s.split('-'); if(!d) return s; return `${d}/${m}/${y}`;
+  if(col.includes('สถานะ')){
+    const val = dd('Status')||'รอดำเนินการ';
+    const cls = (val==='ส่งแล้ว'||val==='พร้อมส่ง')?'ok':'warn';
+    return `<span class="pill ${cls}">${val}</span>`;
+  }
+
+  if(col.includes('ลูกค้า')) return dd('Customer')||'-';
+  if(col.includes('ยอดรวม')) return dd('Amount')? '฿'+(+dd('Amount')).toLocaleString('th-TH'):'-';
+  if(col.includes('อ้างอิง')) return dd('Ref')||'-';
+  if(col.includes('ที่เก็บ')) return dd('Loc')||'-';
+  if(col.includes('ชั้นวาง')) return dd('Rack')||'-';
+  if(col.includes('ล็อต')) return dd('Lot')||'-';
+  if(col.includes('ระดับคั่ว')) return dd('RoastLevel')||'-';
+  if(col.includes('เวลาคั่ว')) return dd('TimeMin')||'-';
+  if(col.includes('Loss')) return dd('Loss')? dd('Loss')+'%':'-';
+  if(col.includes('วิธี')||col==='วิธี'||col.includes('วิธีทำความสะอาด')||col.includes('วิธีคัดแยก')) return dd('Method')||'-';
+  if(col.includes('เลขชุด')) return dd('Batch')||'-';
+  if(col.includes('เส้นทาง')) return dd('Route')||'-';
+  if(col.includes('จุดแวะ')) return dd('Stop')||'-';
+  if(col.includes('คนขับ')) return dd('Driver')||'-';
+  if(col.includes('ทะเบียน')) return dd('Vehicle')||'-';
+  if(col.includes('ผู้รับ')) return dd('Receiver')||'-';
+  if(col.includes('ประเภท')) return dd('DocType')||'-';
+
+  return '-';
 }
 
-/* ===================== SAVE / ANALYZE / EXPORT ===================== */
-function savePage(){
-  const cfg=routes[currentCode]; if(!cfg){toast('ผิดพลาด','ไม่พบฟอร์มนี้','error');return;}
+/* =================== SAVE =================== */
+async function savePage(){
+  const cfg = routes[currentCode];
+  if(!cfg){ alert('ไม่พบฟอร์มนี้'); return; }
+
   const data={};
   (cfg.fields||[]).forEach(f=>{
     const el=document.getElementById('f_'+f.k);
-    data[f.k]=el ? el.value : '';
+    data[f.k]= el ? el.value : '';
   });
-  const hasAny=Object.values(data).some(v=>String(v||'').trim()!=='');
-  if(!hasAny){toast('แจ้งเตือน','กรอกอย่างน้อย 1 ช่องก่อนบันทึก','error');return;}
+  // อย่างน้อย 1 ค่ามีข้อมูล
+  if(!Object.values(data).some(v=>String(v).trim()!=='')){ alert('กรอกอย่างน้อย 1 ช่องก่อนบันทึก'); return; }
 
+  // เติมวันที่อัตโนมัติถ้า route นั้นมี key วันที่ แต่ยังไม่ได้กรอก
+  const dkey = findDateKeyForRoute(currentCode);
+  if(dkey && !data[dkey]) data[dkey] = new Date().toISOString().slice(0,10);
+
+  // save local ทันที
   if(!savedRecords[currentCode]) savedRecords[currentCode]=[];
-  // ใส่วันที่ปัจจุบันอัตโนมัติถ้า route มีคีย์วันที่แต่ผู้ใช้ยังไม่กรอก
-  const dk=findDateKeyForRoute(currentCode);
-  if(dk && !data[dk]) data[dk]=new Date().toISOString().slice(0,10);
-
   savedRecords[currentCode].unshift(data);
-  persist();
-  toast('สำเร็จ','บันทึกข้อมูลแล้ว');
-  openModal(okOv);
+  saveRecordsToStorage();
 
-  // เติมแถวทันทีตามช่วงที่เลือก
-  const qSel=document.getElementById('quickRange');
-  applyRangeToCurrentView(qSel?qSel.value:'all');
+  // แสดงผลในตารางทันที (ตามช่วงเวลา)
+  const sel = document.getElementById('quickRange');
+  if(sel) applyRangeToCurrentView(sel.value);
 
   // ล้างฟอร์ม
-  (cfg.fields||[]).forEach(f=>{
-    const el=document.getElementById('f_'+f.k);
-    if(!el) return;
-    if(el.tagName==='SELECT') el.selectedIndex=0; else el.value='';
-  });
+  clearForm(cfg.fields);
+
+  showToast('บันทึกสำเร็จ', 'บันทึกลงระบบแล้ว (local)');
+
+  // ยิงไป backend ถ้ามี
+  if(API_BASE){
+    try{
+      const res = await fetch(`${API_BASE}/api/records`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({type: currentCode, title: cfg.title, data})
+      });
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      showToast('ซิงค์สำเร็จ', 'ข้อมูลถูกส่งไปยังเซิร์ฟเวอร์แล้ว');
+    }catch(e){
+      showToast('ซิงค์ล้มเหลว', 'ยังใช้งานต่อได้ ข้อมูลอยู่ในเครื่อง', 'error');
+    }
+  }
+}
+function clearForm(fields){
+  (fields||[]).forEach(f=>{ const el=document.getElementById('f_'+f.k); if(!el) return; if(el.tagName==='SELECT') el.selectedIndex=0; else el.value=''; });
 }
 
-function analyzeCurrent(){
-  const cfg=routes[currentCode]; if(!cfg) return;
-  const list=(savedRecords[currentCode]||[]);
-  if(list.length===0){toast('วิเคราะห์','ยังไม่มีข้อมูลหน้านี้','error');return;}
-  // ตัวอย่างสรุป: จำนวนแถว + sum คอลัมน์ที่น่าจะเป็นตัวเลข
-  const keys=Object.keys(list[0]||{});
-  const numKeys=keys.filter(k=> list.some(r=>!isNaN(Number(r[k]))) );
-  const sums={};
-  numKeys.forEach(k=> sums[k]=list.reduce((a,b)=>a+(Number(b[k])||0),0));
-  const lines=[`จำนวนแถว: ${list.length.toLocaleString('th-TH')}`];
-  numKeys.forEach(k=> lines.push(`${k}: ${sums[k].toLocaleString('th-TH')}`));
-  toast('สรุปวิเคราะห์', lines.join(' | '));
-}
-
+/* =================== EXPORT CSV =================== */
 function exportCurrentTable(){
-  const cfg=routes[currentCode]; if(!cfg) return;
-  // ใช้ข้อมูลที่โชว์ตามช่วงในตาราง (อ่านจาก DOM)
-  const rows=[...document.querySelectorAll('#tb tr, #rtb tr')];
-  if(rows.length===0){toast('Export','ไม่มีข้อมูลในตาราง','error');return;}
-  let csv='\uFEFF'+(cfg.cols||[]).join(',')+'\n';
-  rows.forEach(tr=>{
-    const cols=[...tr.children].map(td=>{
-      let t=td.textContent.trim();
-      if(t.includes(',')) t='"'+t.replace(/"/g,'""')+'"';
-      return t;
+  const cfg = routes[currentCode]; if(!cfg || cfg.report) return exportReportCSV();
+  const rows = collectCurrentRowsForExport(cfg);
+  return exportCSV(cfg.title, cfg.cols, rows);
+}
+function collectCurrentRowsForExport(cfg){
+  const dateKey = findDateKeyForRoute(currentCode);
+  const sel = document.getElementById('quickRange');
+  const {from,to} = sel ? getRangeBounds(sel.value) : {from:'',to:''};
+  let rows = (savedRecords[currentCode]||[]).slice();
+  if(dateKey && (from||to)){
+    rows = rows.filter(r=>{
+      const raw = r[dateKey]||'';
+      const iso = raw.includes('/') ? toISOfromDDMMYYYY(raw) : raw;
+      if(!iso) return false;
+      if(from && iso<from) return false;
+      if(to   && iso>to  ) return false;
+      return true;
     });
-    csv+=cols.join(',')+'\n';
+  }
+  return rows;
+}
+function exportReportCSV(){
+  // ดึงข้อมูลที่แสดงในกราฟ (rDataCache)
+  if(!window.rDataCache){ showToast('Export', 'ยังไม่มีข้อมูลรายงาน', 'error'); return; }
+  const {title, header, rows} = window.rDataCache;
+  return exportCSV(title, header, rows);
+}
+function exportCSV(title, header, rows){
+  let csv = '\uFEFF' + header.join(',') + '\n';
+  rows.forEach(r=>{
+    const line = header.map(h=> {
+      let v = r[h] ?? r[h.toLowerCase()] ?? '';
+      if(typeof v==='object') v = JSON.stringify(v);
+      v = String(v);
+      return v.includes(',') ? `"${v.replace(/"/g,'""')}"` : v;
+    }).join(',');
+    csv += line + '\n';
   });
-  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
-  a.download=`${cfg.title}.csv`;
+  a.download=`${title}.csv`;
   a.click();
-  URL.revokeObjectURL(a.href);
 }
 
-/* ===================== CHAT ===================== */
+/* =================== REPORT PAGES =================== */
+function renderReportPage(code, title){
+  const filter = document.getElementById('r-filter');
+  const chartTitle = document.getElementById('r-chart-title');
+  const analyzeBtn = document.getElementById('r-analyze');
+  const rSum = document.getElementById('r-summary');
+
+  // ทำลายกราฟเดิม
+  if(chartInst){ chartInst.destroy(); chartInst=null; }
+  rSum.textContent='';
+
+  // ฟิลเตอร์กลาง (ทุก report มีช่วงวันที่)
+  filter.innerHTML = `
+    <div class="row" style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+      <div>
+        <label>จากวันที่</label>
+        <input type="date" id="f_from">
+      </div>
+      <div>
+        <label>ถึงวันที่</label>
+        <input type="date" id="f_to">
+      </div>
+      <div>
+        <label>ชนิด (ถ้ามี)</label>
+        <select id="f_type">
+          <option value="">ทั้งหมด</option>
+          <option>Arabica</option>
+          <option>Robusta</option>
+          <option>Blend</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:10px;color:#6b7280;font-weight:700">สรุป</div>
+    <div id="r-meta" style="font-size:.9rem;color:#374151"></div>
+  `;
+
+  chartTitle.textContent =
+    code==='harvest-report' ? 'ปริมาณการเก็บเกี่ยว (กก.)'
+  : code==='material-report' ? 'คงเหลือ/เคลื่อนไหววัสดุ'
+  : code==='quality-report'  ? 'แนวโน้มคุณภาพ (เช่น ความชื้น %)'
+  : 'แนวโน้มภาพรวม (ผลผลิต / คุณภาพ / ต้นทุน)';
+
+  analyzeBtn.onclick = ()=> runAnalyze(code, title);
+}
+function runAnalyze(code, title){
+  const from = document.getElementById('f_from').value;
+  const to   = document.getElementById('f_to').value;
+  const type = document.getElementById('f_type').value;
+
+  // สร้างชุดข้อมูลจาก savedRecords ทุก route ที่เกี่ยว
+  let header=['วันที่','ค่า'];
+  let points=[];
+  const push = (d,v)=> points.push({date:d, value:v});
+
+  // รวมข้อมูลตามรายงาน
+  if(code==='harvest-report'){
+    const rows = savedRecords['harvest-record']||[];
+    rows.forEach(r=>{
+      if(type && r.BeanType!==type) return;
+      if(from && r.Date<from) return;
+      if(to   && r.Date>to) return;
+      push(r.Date, Number(r.WeightKg||0));
+    });
+  }
+  else if(code==='material-report'){
+    const rows = (savedRecords['raw-material-track']||[]).concat(savedRecords['warehouse-harvest']||[]);
+    rows.forEach(r=>{
+      const d = r.InboundDate || r.Date;
+      const qty = r.QuantityKg || r.QtyKg || 0;
+      if(from && d<from) return;
+      if(to   && d>to) return;
+      push(d, Number(qty||0));
+    });
+  }
+  else if(code==='quality-report'){
+    const rows = (savedRecords['bean-quality-check']||[]).concat(savedRecords['quality-inspection']||[]);
+    rows.forEach(r=>{
+      const d = r.Date;
+      const v = r.Moisture ?? (r.Result==='ผ่าน'?100:(r.Result==='ไม่ผ่าน'?0:50));
+      if(from && d<from) return;
+      if(to   && d>to) return;
+      push(d, Number(v||0));
+    });
+  }
+  else { // trend-analysis (รวม ๆ)
+    const rows = (savedRecords['harvest-record']||[]).map(r=>({d:r.Date,v:+r.WeightKg||0}))
+      .concat((savedRecords['order-record']||[]).map(r=>({d:r.Date,v:+r.Amount||0})));
+    rows.forEach(x=>{
+      if(from && x.d<from) return;
+      if(to   && x.d>to) return;
+      push(x.d, x.v);
+    });
+    header=['วันที่','ค่า (รวม)'];
+  }
+
+  // รวมกลุ่มตามวัน
+  const map={};
+  points.forEach(p=>{ map[p.date] = (map[p.date]||0) + p.value; });
+  const dates = Object.keys(map).sort();
+  const data = dates.map(d=> map[d]);
+
+  // สรุปสถิติ
+  const sum = data.reduce((a,b)=>a+b,0);
+  const avg = data.length ? (sum/data.length) : 0;
+  const min = data.length ? Math.min(...data) : 0;
+  const max = data.length ? Math.max(...data) : 0;
+
+  // เก็บสำหรับ Export
+  window.rDataCache = {
+    title,
+    header,
+    rows: dates.map((d,i)=> ({ 'วันที่': d, [header[1]]: data[i] }))
+  };
+
+  // วาดกราฟ
+  const ctx=document.getElementById('r-chart');
+  if(chartInst) chartInst.destroy();
+  chartInst = new Chart(ctx, {
+    type: code==='quality-report' || code==='trend-analysis' ? 'line' : 'bar',
+    data:{ labels: dates.map(d=> d.split('-').reverse().join('/')),
+      datasets:[{ data, borderRadius:8, borderSkipped:false, fill: code!=='harvest-report' }] },
+    options:{ plugins:{ legend:{display:false} },
+      scales:{ y:{ beginAtZero:true } } }
+  });
+
+  // สรุปตัวหนังสือ
+  document.getElementById('r-summary').textContent =
+    `รวม: ${sum.toLocaleString('th-TH')} | เฉลี่ย: ${avg.toFixed(1)} | สูงสุด: ${max.toLocaleString('th-TH')} | ต่ำสุด: ${min.toLocaleString('th-TH')}`;
+
+  const meta = document.getElementById('r-meta');
+  meta.textContent = `ช่วง: ${from||'-'} ถึง ${to||'-'}  ${type?`| ชนิด: ${type}`:''}`;
+}
+
+/* =================== CHAT =================== */
 const chatEl=document.getElementById('chat');
-const overlay=document.getElementById('overlay');
+const chatOverlay=document.getElementById('overlay');
 const chatBody=document.getElementById('chatBody');
 const chatInput=document.getElementById('chatInput');
 
-function loadChat(){
-  const raw=localStorage.getItem(KEY_CHAT);
-  if(raw){ try{return JSON.parse(raw)}catch(e){return []} }
-  // seed แชทเริ่มต้น
-  const init=[
-    {name:'คุณสมชาย ใจดี', time:agoMin(2), msg:'สอบถามสถานะคำสั่งซื้อ ORD-2025-089 ครับ'},
-    {name:'Admin', time:agoMin(1), msg:'สวัสดีครับคุณสมชาย คำสั่งซื้อกำลังจัดเตรียมส่งครับ', mine:true},
-    {name:'คุณวิไล รักสุข', time:agoMin(15), msg:'ขอใบกำกับภาษีเพิ่มเติมสำหรับ ORD-2025-077 ครับ'},
-  ];
-  localStorage.setItem(KEY_CHAT, JSON.stringify(init));
-  return init;
+let chatMessages = [
+  {name:'คุณสมชาย ใจดี', time:'2 นาทีที่แล้ว', msg:'สอบถามสถานะคำสั่งซื้อ ORD-2025-089 ครับ'},
+  {name:'Admin', time:'1 นาทีที่แล้ว', msg:'สวัสดีครับคุณสมชาย คำสั่งซื้อกำลังจัดเตรียมส่งครับ', mine:true},
+  {name:'คุณวิไล รักสุข', time:'15 นาทีที่แล้ว', msg:'ขอใบกำกับภาษีเพิ่มเติมสำหรับ ORD-2025-077 ครับ'},
+  {name:'บริษัท กาแฟดี จำกัด', time:'1 ชั่วโมงที่แล้ว', msg:'สนใจสั่งซื้อเมล็ดกาแฟ Arabica เกรด A จำนวน 500 กก.'},
+  {name:'⚠️ ระบบ', time:'3 ชั่วโมงที่แล้ว', msg:'มีข้อร้องเรียนเรื่องคุณภาพสินค้า (ORD-2025-076)'}
+];
+let unreadCount = 0;
+
+function updateChatBadge(){
+  const badge = document.getElementById('bdg-chat');
+  if(!badge) return;
+  if(unreadCount > 0){
+    badge.textContent = unreadCount;
+    badge.style.display = 'block';
+  } else {
+    badge.style.display = 'none';
+  }
 }
-let chatMessages = loadChat();
+
+function toggleChat(open){
+  chatEl.classList.toggle('open',!!open);
+  chatOverlay.classList.toggle('open',!!open);
+  chatEl.setAttribute('aria-hidden', open?'false':'true');
+  if(open){ 
+    renderChat(); 
+    chatInput.focus();
+    // รีเซ็ต badge
+    unreadCount = 0;
+    updateChatBadge();
+  }
+}
 
 function renderChat(){
   chatBody.innerHTML='';
   chatMessages.forEach(m=>{
     const d=document.createElement('div');
-    d.className='msg'+(m.mine?' mine':'');
-    d.innerHTML=`<strong>${m.name}</strong><br>${m.msg}<br><small style="opacity:.7">${m.time}</small>`;
+    d.className = m.mine ? 'msg mine' : 'msg';
+    d.innerHTML = `<strong>${m.name}</strong><br>${m.msg}<br><small style="opacity:.7">${m.time}</small>`;
     chatBody.appendChild(d);
   });
   chatBody.scrollTop=chatBody.scrollHeight;
 }
-function toggleChat(open){
-  chatEl.classList.toggle('open',!!open);
-  overlay.classList.toggle('open',!!open);
-  chatEl.setAttribute('aria-hidden',open?'false':'true');
-  if(open){renderChat(); chatInput.focus();}
-}
+
 function sendChat(){
   const t=chatInput.value.trim(); if(!t) return;
   chatMessages.push({name:'Admin', time:'ตอนนี้', msg:t, mine:true});
-  chatInput.value=''; persistChat(); renderChat();
+  chatInput.value=''; renderChat();
   setTimeout(()=>{
-    const replies=['ขอบคุณครับ!','เข้าใจแล้ว ขอเวลาสักครู่','ตรวจสอบให้ครับ','รับเรื่องเรียบร้อยครับ'];
-    const r=replies[Math.floor(Math.random()*replies.length)];
-    chatMessages.push({name:'ลูกค้า', time:'ตอนนี้', msg:r});
-    persistChat(); renderChat();
-  },800);
+    const replies=['ขอบคุณครับ!','เข้าใจแล้ว ขอเวลาสักครู่','ตรวจสอบให้ครับ','รับทราบค่ะ'];
+    chatMessages.push({name:'ลูกค้า', time:'ตอนนี้', msg:rand(replies)});
+    renderChat();
+  }, 800);
 }
-function persistChat(){ localStorage.setItem(KEY_CHAT, JSON.stringify(chatMessages)); }
-function agoMin(n){return `${n} นาทีที่แล้ว`}
 
-// Mock incoming message ทุก 20s (ถ้า drawer ปิด)
+// ข้อความสุ่มเข้าเรื่อย ๆ
 setInterval(()=>{
   if(!chatEl.classList.contains('open')){
-    const msgs=['สอบถามราคาวันนี้หน่อยค่ะ','ยังมีสต็อก Arabica หรือครับ','ส่ง COD ได้ไหมครับ','ของถึงเมื่อไหร่คะ'];
-    const m=msgs[Math.floor(Math.random()*msgs.length)];
-    chatMessages.push({name:'ลูกค้า', time:'ตอนนี้', msg:m});
-    persistChat();
+    const msgs=['สอบถามราคาวันนี้หน่อยค่ะ','ยังมีสต็อก Arabica ไหมครับ','จัดส่งได้พรุ่งนี้ไหมคะ','ขอลดราคาได้ไหมครับ'];
+    chatMessages.push({name:'ลูกค้า', time:'ตอนนี้', msg:rand(msgs)});
+    unreadCount++;
+    updateChatBadge();
+    const b=document.getElementById('bdg-ord');
+    if(b) b.textContent = String(parseInt(b.textContent||'0',10)+1);
   }
-}, 20000);
+}, 15000);
 
-/* ===================== TOAST / MODAL ===================== */
-function toast(title,msg,type){
-  const box=document.createElement('div'); box.className='toast'+(type==='error'?' error':'');
-  box.innerHTML=`<div class="t-hd"><span>${title}</span><button class="btn" style="padding:2px 8px" onclick="this.closest('.toast').remove()">ปิด</button></div><div class="t-msg">${msg}</div>`;
-  document.getElementById('toasts').appendChild(box);
-  setTimeout(()=>{ if(box.parentNode) box.parentNode.removeChild(box); }, 5000);
-}
-function openModal(el){el.classList.add('show');el.setAttribute('aria-hidden','false');}
-function closeModal(el){el.classList.remove('show');el.setAttribute('aria-hidden','true');}
+/* =================== DASHBOARD DEMO =================== */
+setInterval(()=>{
+  const n = parseInt(document.getElementById('kgToday').textContent.replace(/,/g,'')) + randInt(1,9);
+  document.getElementById('kgToday').textContent = n.toLocaleString('th-TH');
+}, 4000);
 
-/* ===================== PERSIST & SEED DATA ===================== */
-function loadSavedRecords(){
-  const raw=localStorage.getItem(KEY_DATA);
-  if(raw){ try{savedRecords=JSON.parse(raw)||{}}catch(e){savedRecords={}} }
-  else savedRecords={};
-}
-function persist(){ localStorage.setItem(KEY_DATA, JSON.stringify(savedRecords)); }
+/* =================== INIT =================== */
+loadSavedRecords();
+seedAllIfEmpty(); // เติมข้อมูลทุกหน้า (ถ้ายังไม่มี)
+route(location.hash);
 
-// เติมข้อมูลย้อนหลังทุกหน้า (18 เดือนย้อนหลัง + ปีที่แล้วบางส่วน)
-function seedAllIfEmpty(){
-  const needSeed = Object.keys(routes).some(k=>{
-    if(routes[k].report) return false;
-    return !Array.isArray(savedRecords[k]) || savedRecords[k].length===0;
-  });
-  if(!needSeed) return;
-
-  const today=new Date();
-  const dateList=[];
-  const monthsBack=18;
-  for(let i=0;i<=monthsBack;i++){
-    const d=new Date(today.getFullYear(), today.getMonth()-i, 15);
-    // 6 จุดต่อเดือน
-    for(let j=0;j<6;j++){
-      const dd=new Date(d.getFullYear(), d.getMonth(), 1+Math.floor(Math.random()*27));
-      dateList.push(dd.toISOString().slice(0,10));
-    }
-  }
-
-  function rand(a,b){return a+Math.floor(Math.random()*(b-a+1))}
-  const beans=['Arabica','Robusta','Blend'];
-  const suppliers=['บริษัท A','บริษัท B','วิสาหกิจชุมชน C','สหกรณ์ D','ไร่เขียว E'];
-  const grades=['A','B','C'];
-  const methods=['ลม','ตะแกรง','มือ','เครื่อง'];
-  const routesArr=Object.keys(routes).filter(k=>!routes[k].report);
-
-  routesArr.forEach(code=>{
-    if(!savedRecords[code]) savedRecords[code]=[];
-    if(savedRecords[code].length>0) return;
-
-    dateList.forEach((ds,idx)=>{
-      let rec={};
-      switch(code){
-        case 'harvest-record':
-          rec={LotNumber:`LOT-${ds.replace(/-/g,'')}-${idx%50}`, Date:ds, BeanType:beans[rand(0,2)], WeightKg: rand(120,600)};
-          break;
-        case 'raw-material-track':
-          rec={InboundDate:ds, Supplier:suppliers[rand(0,suppliers.length-1)], QuantityKg: rand(80,400)};
-          break;
-        case 'bean-quality-check':
-          rec={Date:ds, Moisture:(Math.random()*4+9).toFixed(2), Defects:(Math.random()*2+0.5).toFixed(2), Grade:grades[rand(0,2)]};
-          break;
-        case 'cleaning-record':
-          rec={Date:ds, Start:`0${rand(7,9)}:00`, End:`${rand(10,12)}:30`, Method:methods[rand(0,methods.length-1)]};
-          break;
-        case 'sorting-record':
-          rec={Date:ds, Batch:`B-${rand(100,999)}`, Method:methods[rand(0,methods.length-1)], OutputKg:rand(50,300)};
-          break;
-        case 'resting-record':
-          rec={RestStart:ds, RestEnd:shiftISO(ds, rand(1,5)), Temp:rand(18,24)};
-          break;
-        case 'hulling-roasting':
-          rec={Date:ds, RoastLevel:beans[rand(0,2)]==='Arabica'?'Medium':'Dark', TimeMin:rand(10,20), Loss:(Math.random()*5+8).toFixed(1)};
-          break;
-        case 'quality-inspection':
-          rec={Date:ds, Param:['Moisture','Defects','Color'][rand(0,2)], Value:(Math.random()*10+1).toFixed(2), Result: ['ผ่าน','ไม่ผ่าน','ตรวจสอบใหม่'][rand(0,2)]};
-          break;
-        case 'material-tracking':
-          rec={Date:ds, Item:['ถุงกระดาษ','กล่อง','สติ๊กเกอร์','ฝา'][rand(0,3)], Qty:rand(10,120)};
-          break;
-        case 'bean-quality':
-          rec={Date:ds, Sample:`S-${rand(100,999)}`, Score:rand(70,95), Note:['ดี','พอใช้','ต้องตรวจซ้ำ'][rand(0,2)]};
-          break;
-        case 'warehouse-harvest':
-          rec={Date:ds, Ref:`REF-${rand(1000,9999)}`, Loc:['A1','B2','C3'][rand(0,2)], QtyKg:rand(100,700)};
-          break;
-        case 'warehouse-tracking':
-          rec={Date:ds, Rack:['R1','R2','R3','R4'][rand(0,3)], Qty:rand(5,80)};
-          break;
-        case 'warehouse-quality':
-          rec={Date:ds, Lot:`L-${rand(1000,9999)}`, QC:['ผ่าน','ไม่ผ่าน','รอตรวจสอบ'][rand(0,2)], Expire:shiftISO(ds, rand(30,180))};
-          break;
-        case 'order-record':
-          rec={Date:ds, OrderNo:`ORD-${ds.replace(/-/g,'')}-${rand(10,99)}`, Customer:['ร้านน้องกาแฟ','บ.ยิ้มแฉ่ง','Cafe ABC','Brew Bros'][rand(0,3)], Amount:rand(1500,25000)};
-          break;
-        case 'order-status':
-          rec={Date:ds, OrderNo:`ORD-${ds.replace(/-/g,'')}-${rand(10,99)}`, Status:['รับแล้ว','กำลังเตรียม','พร้อมส่ง','ส่งแล้ว'][rand(0,3)], ETA:shiftISO(ds, rand(1,7))};
-          break;
-        case 'documents':
-          rec={IssueDate:ds, DocType:['ใบกำกับภาษี','ใบส่งของ','ใบรับของ'][rand(0,2)], Ref:`DOC-${rand(10000,99999)}`};
-          break;
-        case 'transport-pickup':
-          rec={Date:ds, PickupID:`PK-${rand(1000,9999)}`, Driver:['เอกชัย','วีระ','สมปอง','ชาญวิทย์'][rand(0,3)], Vehicle:`${['กข','ขค','คง'][rand(0,2)]}-${rand(1111,9999)}`};
-          break;
-        case 'route-schedule':
-          rec={ShipDate:ds, Route:['เหนือ','อีสาน','กลาง','ใต้'][rand(0,3)], Stop:['A','B','C'][rand(0,2)]};
-          break;
-        case 'delivery-confirm':
-          rec={Time:ds, Ref:`DLV-${rand(10000,99999)}`, Receiver:['คุณศรี','คุณมิว','คุณเจน','คุณบอล'][rand(0,3)]};
-          break;
-      }
-      savedRecords[code].push(rec);
-    });
-  });
-  persist();
-}
-function shiftISO(iso, days){ const d=new Date(iso); d.setDate(d.getDate()+days); return d.toISOString().slice(0,10); }
-
-/* ===================== INIT ===================== */
-function init(){
-  loadSavedRecords();
-  seedAllIfEmpty();
-  route(location.hash);
-  // quick range default apply on first generic page open will run via renderPage
-  // dashboard animations
-  setInterval(()=>{const el=document.getElementById('kgToday');const v=parseInt(el.textContent.replace(/,/g,''))+Math.floor(Math.random()*7);el.textContent=v.toLocaleString();},4000);
-}
-init();
-
-/* expose */
-window.go=go; window.savePage=savePage; window.logout=logout; window.fillDemo=fillDemo; window.doLogin=doLogin;
-window.toggleChat=toggleChat; window.sendChat=sendChat; window.analyzeCurrent=analyzeCurrent; window.exportCurrentTable=exportCurrentTable;
-window.handleQuickRangeChange=handleQuickRangeChange;
-
+// expose
+window.go=go; window.savePage=savePage; window.logout=logout; window.fillDemo=fillDemo;
 </script>
 </body>
 </html>
